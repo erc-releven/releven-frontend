@@ -7,7 +7,10 @@
 	},
 	"AppHeader": {
 		"links": {
-			"home": "Home"
+			"home": "Home",
+			"faq": "FAQ",
+			"about": "About",
+			"login": "Log In"
 		},
 		"navigation-primary": "Primary"
 	},
@@ -30,9 +33,8 @@
 		"title": "Imprint"
 	},
 	"IndexPage": {
-		"badge": "ACDH-CH frontend team",
-		"lead-in": "This is a starter template built with Next.js 14. It includes internationalisation, end-to-end testing, and supports MDX for writing documentation.",
-		"title": "Application template"
+		"lead-in": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		"title": "Search the 11th century!"
 	},
 	"Loading": {
 		"loading": "Loading"

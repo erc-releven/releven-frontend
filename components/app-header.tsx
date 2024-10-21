@@ -1,35 +1,38 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
 import { AppNavLink } from "@/components/app-nav-link";
 import { ColorSchemeSwitcher } from "@/components/color-scheme-switcher";
-import type { LinkProps } from "@/components/link";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { createHref } from "@/lib/create-href";
 
 export function AppHeader(): ReactNode {
 	const t = useTranslations("AppHeader");
 
-	const links = {
-		home: { href: createHref({ pathname: "/" }), label: t("links.home") },
-	} satisfies Record<string, { href: LinkProps["href"]; label: string }>;
-
 	return (
 		<header className="border-b">
 			<div className="container flex items-center justify-between gap-4 py-6">
-				<nav aria-label={t("navigation-primary")}>
-					<ul className="flex items-center gap-4 text-sm" role="list">
-						{Object.entries(links).map(([id, link]) => {
-							return (
-								<li key={id}>
-									<AppNavLink href={link.href}>{link.label}</AppNavLink>
-								</li>
-							);
-						})}
-					</ul>
-				</nav>
-
+				<Image alt="" height={62} src="/assets/images/releven.svg" width={120} />
 				<div className="flex items-center gap-4">
+					<nav aria-label={t("navigation-primary")}>
+						<ul className="flex items-center gap-4 text-sm" role="list">
+							<li>
+								<AppNavLink href={createHref({ pathname: "/about" })}>
+									{t("links.about")}
+								</AppNavLink>
+							</li>
+							<li>
+								<AppNavLink href={createHref({ pathname: "/faq" })}>{t("links.faq")}</AppNavLink>
+							</li>
+							<li>
+								<AppNavLink href={createHref({ pathname: "/login" })}>
+									{t("links.login")}
+								</AppNavLink>
+							</li>
+						</ul>
+					</nav>
+
 					<ColorSchemeSwitcher />
 					<LocaleSwitcher />
 				</div>

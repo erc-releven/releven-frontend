@@ -30,9 +30,9 @@ body {
 	--color-on-surface: theme("colors.neutral.950");
 	--color-overlay: theme("colors.neutral.0");
 	--color-on-overlay: theme("colors.neutral.950");
-	--color-primary: theme("colors.neutral.900");
+	--color-primary: rgb(45 58 104);
 	--color-on-primary: theme("colors.neutral.50");
-	--color-secondary: theme("colors.neutral.100");
+	--color-secondary: rgb(225 155 43);
 	--color-on-secondary: theme("colors.neutral.900");
 	--color-muted: theme("colors.neutral.100");
 	--color-on-muted: theme("colors.neutral.500");

@@ -7,7 +7,10 @@
 	},
 	"AppHeader": {
 		"links": {
-			"home": "Startseite"
+			"home": "Home",
+			"faq": "FAQ",
+			"about": "About",
+			"login": "Log In"
 		},
 		"navigation-primary": "Primär"
 	},

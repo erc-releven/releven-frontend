@@ -18,11 +18,12 @@ export const buttonStyles = compose(
 		variants: {
 			size: {
 				sm: "h-8 rounded-md px-3 text-xs",
-				md: "h-9 px-4 py-2 text-sm",
+				md: "h-9 px-4 py-2 text-sm uppercase",
 				lg: "h-10 rounded-md px-8 text-sm",
 				icon: "size-9",
 			},
 			variant: {
+				default: "border border-gray-600 text-primary",
 				primary: "bg-primary text-on-primary shadow-sm hover:bg-primary/90 pressed:bg-primary/80",
 				secondary:
 					"bg-secondary text-on-secondary shadow-sm hover:bg-secondary/80 pressed:bg-secondary/70",
@@ -39,7 +40,7 @@ export const buttonStyles = compose(
 		},
 		defaultVariants: {
 			size: "md",
-			variant: "primary",
+			variant: "default",
 		},
 	}),
 );
