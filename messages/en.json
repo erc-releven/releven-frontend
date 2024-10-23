@@ -1,7 +1,10 @@
 {
 	"AppFooter": {
 		"links": {
-			"imprint": "Imprint"
+			"imprint": "Imprint",
+			"privacy": "privacy",
+			"faq": "faq",
+			"about": "about"
 		},
 		"navigation-secondary": "Secondary"
 	},
