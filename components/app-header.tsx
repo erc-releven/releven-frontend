@@ -3,7 +3,6 @@ import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
 import { AppNavLink } from "@/components/app-nav-link";
-import { ColorSchemeSwitcher } from "@/components/color-scheme-switcher";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { createHref } from "@/lib/create-href";
 
@@ -33,7 +32,6 @@ export function AppHeader(): ReactNode {
 						</ul>
 					</nav>
 
-					<ColorSchemeSwitcher />
 					<LocaleSwitcher />
 				</div>
 			</div>
