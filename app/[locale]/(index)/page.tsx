@@ -57,9 +57,9 @@ export default function IndexPage(props: IndexPageProps): ReactNode {
 
 	return (
 		<MainContent className="container w-full">
-			<section className="mx-auto grid w-full grid-cols-[1fr_2fr] items-start justify-items-center gap-3 bg-[#FBF7F0] md:py-12">
-				<div className="flex max-w-screen-lg flex-col gap-6 px-8 py-5">
-					<h1 className="text-balance text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl">
+			<section className="mx-auto flex w-full flex-col items-center gap-3 bg-[#FBF7F0] md:py-12 lg:flex-row">
+				<div className="flex max-w-screen-lg basis-1/3 flex-col gap-6 px-8 py-5">
+					<h1 className="text-balance text-3xl font-bold leading-tight tracking-tighter text-primary md:text-5xl lg:text-6xl">
 						{t("title")}
 					</h1>
 					<div className="w-full max-w-screen-md text-on-muted sm:text-xl">{t("lead-in")}</div>
@@ -73,15 +73,15 @@ export default function IndexPage(props: IndexPageProps): ReactNode {
 						<Image alt="" src={coretrust} />
 					</div>
 				</div>
-				<div>
-					<Image alt="" src={leaderImage} />
+				<div className="basis-2/3">
+					<Image alt="" className="object-cover" height={358} src={leaderImage} />
 				</div>
 			</section>
 
 			<section className="flex flex-col items-center py-20">
 				<h2 className="text-lg font-extrabold uppercase text-primary">research platform</h2>
 				<span className="mb-20 text-3xl">Discover Resources from the 11th century</span>
-				<div className="flex flex-row items-center gap-4">
+				<div className="flex flex-col items-center gap-4 lg:flex-row">
 					<ImageCard
 						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
 						icon="/assets/images/person.svg"
@@ -108,7 +108,7 @@ export default function IndexPage(props: IndexPageProps): ReactNode {
 			<section className="flex flex-col items-center bg-[#CEA46F] p-10">
 				<h2 className="text-lg font-extrabold uppercase text-primary">About Us</h2>
 				<span className="block text-center text-3xl">Discover more about Releven</span>
-				<div className="flex flex-row items-start gap-8 py-16">
+				<div className="flex flex-col items-start gap-8 py-16 lg:flex-row">
 					<Image alt="" className="max-w-fit" src={researchPlatformImage} />
 					<div className="max-w-[31rem]">
 						<p>
@@ -128,7 +128,7 @@ export default function IndexPage(props: IndexPageProps): ReactNode {
 			<section className="flex flex-col items-center py-16">
 				<h2 className="text-lg font-extrabold uppercase text-primary">Services</h2>
 				<span className="block text-center text-3xl">Find and compare viewpoints</span>
-				<div className="flex flex-row gap-8 py-16">
+				<div className="flex flex-col gap-8 py-16 lg:flex-row">
 					<IconCard
 						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 						icon={searchIcon}
