@@ -1,7 +1,10 @@
 {
 	"AppFooter": {
 		"links": {
-			"imprint": "Impressum"
+			"imprint": "Impressum",
+			"privacy": "privacy",
+			"faq": "faq",
+			"about": "about"
 		},
 		"navigation-secondary": "Sekundär"
 	},
@@ -49,6 +52,12 @@
 		"switch-locale-to": "Zu {locale} wechseln"
 	},
 	"NotFoundPage": {
+		"meta": {
+			"title": "Seite nicht gefunden"
+		},
+		"title": "Seite nicht gefunden"
+	},
+	"PeoplePage": {
 		"meta": {
 			"title": "Seite nicht gefunden"
 		},

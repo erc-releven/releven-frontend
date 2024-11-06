@@ -55,5 +55,11 @@
 			"title": "Page not found"
 		},
 		"title": "Page not found"
+	},
+	"PeoplePage": {
+		"meta": {
+			"title": "People"
+		},
+		"title": "People"
 	}
 }

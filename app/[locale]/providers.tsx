@@ -1,7 +1,8 @@
 "use client";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NextIntlClientProvider } from "next-intl";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { I18nProvider, RouterProvider } from "react-aria-components";
 
 import type { Locale } from "@/config/i18n.config";
@@ -17,12 +18,17 @@ export function Providers(props: ProvidersProps): ReactNode {
 	const { children, locale, messages } = props;
 
 	const router = useRouter();
+	const [queryClient] = useState(() => {
+		return new QueryClient();
+	});
 
 	return (
-		<RouterProvider navigate={router.push}>
-			<NextIntlClientProvider locale={locale} messages={messages}>
-				<I18nProvider locale={locale}>{children}</I18nProvider>
-			</NextIntlClientProvider>
-		</RouterProvider>
+		<QueryClientProvider client={queryClient}>
+			<RouterProvider navigate={router.push}>
+				<NextIntlClientProvider locale={locale} messages={messages}>
+					<I18nProvider locale={locale}>{children}</I18nProvider>
+				</NextIntlClientProvider>
+			</RouterProvider>
+		</QueryClientProvider>
 	);
 }
