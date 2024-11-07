@@ -1,10 +1,26 @@
 {
 	"AppFooter": {
+		"imprint": "ACDH-CH\nAustrian Centre for Digital Humanities\nand Cultural Heritage\nAustrian Academy of Sciences\n\nBäckerstraße 13\n1010 Vienna\nT: +43 1 51581-2200",
+		"faq": {
+			"title": "FAQ",
+			"q1": "How do I compare viewpoints?"
+		},
+		"about": {
+			"title": "About",
+			"link1": "Anchor Link"
+		},
+		"helpdesk": {
+			"title": "Helpdesk",
+			"leader": "The ACDH-CH offers support for questions about digital humanities-related topics.",
+			"search": "Search website",
+			"placeholder": "Search website"
+		},
+		"copyright": "© Copyright OEAW",
 		"links": {
 			"imprint": "Imprint",
-			"privacy": "privacy",
-			"faq": "faq",
-			"about": "about"
+			"privacy": "Privacy",
+			"faq": "FAQ",
+			"about": "About"
 		},
 		"navigation-secondary": "Secondary"
 	},
