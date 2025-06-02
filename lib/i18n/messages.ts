@@ -19,11 +19,7 @@ export async function getIntlMessages(locale: IntlLocale) {
 	});
 
 	switch (language) {
-		case "de": {
-			await import("@valibot/i18n/de");
-			break;
-		}
-
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		case "en": {
 			/** Default messages. */
 			break;

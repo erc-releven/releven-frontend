@@ -32,6 +32,7 @@ export function LocaleSwitcher(): ReactNode {
 
 				const separator = index !== 0 ? <span className="cursor-default">|</span> : null;
 
+				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 				if (locale === currentLocale) {
 					return (
 						<Fragment key={locale}>

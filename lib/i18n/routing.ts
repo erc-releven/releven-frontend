@@ -5,7 +5,6 @@ import { defaultLocale, locales } from "@/lib/i18n/locales";
 export const localePrefix = {
 	mode: "always",
 	prefixes: {
-		"de-AT": "/de",
 		"en-GB": "/en",
 	},
 } as const satisfies LocalePrefix<typeof locales>;
