@@ -3,12 +3,7 @@ import type { FC, ReactNode } from "react";
 
 import { Logo } from "@/components/logo";
 import { NavLink } from "@/components/nav-link";
-import {
-	BlueskyIcon,
-	MastodonIcon,
-	TwitterIcon,
-	YouTubeIcon,
-} from "@/components/social-media-icons";
+import { BlueskyIcon, MastodonIcon } from "@/components/social-media-icons";
 import { TouchTarget } from "@/components/ui/touch-target";
 import { useMetadata } from "@/lib/i18n/metadata";
 import { createHref } from "@/lib/navigation/create-href";
@@ -43,18 +38,6 @@ export function AppFooter(): ReactNode {
 			href: meta.social.mastodon,
 			label: t("navigation-social-media.items.mastodon"),
 			icon: MastodonIcon,
-		},
-		twitter: {
-			type: "link",
-			href: meta.social.twitter,
-			label: t("navigation-social-media.items.twitter"),
-			icon: TwitterIcon,
-		},
-		youtube: {
-			type: "link",
-			href: meta.social.youtube,
-			label: t("navigation-social-media.items.youtube"),
-			icon: YouTubeIcon,
 		},
 	} satisfies Record<string, NavigationLink & { icon: FC }>;
 

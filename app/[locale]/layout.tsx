@@ -59,11 +59,6 @@ export async function generateMetadata(
 			locale,
 			type: "website",
 		},
-		twitter: {
-			card: "summary_large_image",
-			creator: meta.social.twitter,
-			site: meta.social.twitter,
-		},
 		verification: {
 			google: env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
 		},
