@@ -11,7 +11,28 @@
 		"title": "About the project"
 	},
 	"AppFooter": {
+		"about": {
+			"title": "About",
+			"link1": "Anchor Link"
+		},
+		"copyright": "© Copyright OEAW",
+		"faq": {
+			"title": "FAQ",
+			"q1": "How do I compare viewpoints?"
+		},
 		"creator": "Austrian Centre for Digital Humanities and Cultural Heritage",
+		"helpdesk": {
+			"title": "Helpdesk",
+			"leader": "The ACDH-CH offers support for questions about digital humanities-related topics.",
+			"search": "Search website",
+			"placeholder": "Search website"
+		},
+		"links": {
+			"imprint": "Imprint",
+			"privacy": "Privacy",
+			"faq": "FAQ",
+			"about": "About"
+		},
 		"navigation": {
 			"items": {
 				"contact": "Contact",
@@ -64,9 +85,50 @@
 		"title": "Imprint"
 	},
 	"IndexPage": {
-		"badge": "ACDH-CH frontend team",
-		"lead-in": "This is a starter template built with Next.js 15. It includes internationalisation, dark mode, and end-to-end testing.",
-		"title": "Application template"
+		"lead-in": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		"search_placeholder": "Search",
+		"title": "Search the 11th century!",
+		"try_it_out": "try it out",
+		"researchplatform": {
+			"title": "research platform",
+			"lead-in": "Discover Resources from the 11th century",
+			"people": {
+				"title": "Persons",
+				"subtitle": "Lorem ipsum",
+				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+			},
+			"places": {
+				"title": "Persons",
+				"subtitle": "Lorem ipsum",
+				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+			},
+			"texts": {
+				"title": "Persons",
+				"subtitle": "Lorem ipsum",
+				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+			}
+		},
+		"about": {
+			"title": "About Us",
+			"lead-in": "Discover more about Releven",
+			"description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim."
+		},
+		"services": {
+			"title": "Services",
+			"lead-in": "Find and compare viewpoints",
+			"relationships": {
+				"title": "Discover new relationships",
+				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+			},
+			"related": {
+				"title": "Find related entities",
+				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+			},
+			"viewpoints": {
+				"title": "Compare viewpoints",
+				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+			}
+		}
 	},
 	"Loading": {
 		"loading": "Loading"
