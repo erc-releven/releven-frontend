@@ -59,9 +59,25 @@
 			},
 			"items": {
 				"about": "About the project",
-				"documentation": "Documentation",
-				"example": "Example",
-				"home": "Home"
+				"home": "Home",
+				"resources": {
+					"title": "Resources",
+					"people": {
+						"title": "People",
+						"subtitle": "Lorem ipsum",
+						"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+					},
+					"places": {
+						"title": "Places",
+						"subtitle": "Lorem ipsum",
+						"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+					},
+					"texts": {
+						"title": "Texts",
+						"subtitle": "Lorem ipsum",
+						"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+					}
+				}
 			},
 			"label": "Primary"
 		}
@@ -91,22 +107,7 @@
 		"try_it_out": "try it out",
 		"researchplatform": {
 			"title": "research platform",
-			"lead-in": "Discover Resources from the 11th century",
-			"people": {
-				"title": "Persons",
-				"subtitle": "Lorem ipsum",
-				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
-			},
-			"places": {
-				"title": "Persons",
-				"subtitle": "Lorem ipsum",
-				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
-			},
-			"texts": {
-				"title": "Persons",
-				"subtitle": "Lorem ipsum",
-				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
-			}
+			"lead-in": "Discover Resources from the 11th century"
 		},
 		"about": {
 			"title": "About Us",

@@ -93,6 +93,7 @@ function IntroSection(): ReactNode {
 
 function ResearchPlatformSection(): ReactNode {
 	const t = useTranslations("IndexPage.researchplatform");
+	const ts = useTranslations("AppHeader.navigation.items.resources");
 
 	const cards = {
 		people: { icon: personImage },
@@ -109,11 +110,11 @@ function ResearchPlatformSection(): ReactNode {
 					return (
 						<ImageCard
 							key={id}
-							description={t(`${id}.description` as never)}
+							description={ts(`${id}.description` as never)}
 							icon={`/assets/images/${id}.svg`}
 							image={card.icon}
-							subtitle={t(`${id}.subtitle` as never)}
-							title={t(`${id}.title` as never)}
+							subtitle={ts(`${id}.subtitle` as never)}
+							title={ts(`${id}.title` as never)}
 						/>
 					);
 				})}

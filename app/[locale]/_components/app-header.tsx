@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
-import { exampleAction } from "@/app/[locale]/_client-actions/navigation";
 import { AppNavigation, AppNavigationMobile } from "@/app/[locale]/_components/app-navigation";
 import { ColorSchemeSwitcher } from "@/app/[locale]/_components/color-scheme-switcher";
 import { createHref } from "@/lib/navigation/create-href";
@@ -18,26 +17,31 @@ export function AppHeader(): ReactNode {
 			href: createHref({ pathname: "/" }),
 			label: t("navigation.items.home"),
 		},
+		resources: {
+			type: "menu",
+			label: t("navigation.items.resources.title"),
+			children: {
+				people: {
+					type: "link",
+					href: createHref({ pathname: "/people" }),
+					label: t("navigation.items.resources.people.title"),
+				},
+				places: {
+					type: "link",
+					href: createHref({ pathname: "/places" }),
+					label: t("navigation.items.resources.places.title"),
+				},
+				texts: {
+					type: "link",
+					href: createHref({ pathname: "/texts" }),
+					label: t("navigation.items.resources.texts.title"),
+				},
+			},
+		},
 		about: {
 			type: "link",
 			href: createHref({ pathname: "/about" }),
 			label: t("navigation.items.about"),
-		},
-		documentation: {
-			type: "menu",
-			label: t("navigation.items.documentation"),
-			children: {
-				about: {
-					type: "link",
-					href: createHref({ pathname: "/about" }),
-					label: t("navigation.items.about"),
-				},
-				example: {
-					type: "action",
-					onAction: exampleAction,
-					label: t("navigation.items.example"),
-				},
-			},
 		},
 	} satisfies Record<string, NavigationItem>;
 
