@@ -109,11 +109,11 @@ function ResearchPlatformSection(): ReactNode {
 					return (
 						<ImageCard
 							key={id}
-							description={t(`${id}.description`)}
+							description={t(`${id}.description` as never)}
 							icon={`/assets/images/${id}.svg`}
 							image={card.icon}
-							subtitle={t(`${id}.subtitle`)}
-							title={t(`${id}.title`)}
+							subtitle={t(`${id}.subtitle` as never)}
+							title={t(`${id}.title` as never)}
 						/>
 					);
 				})}
