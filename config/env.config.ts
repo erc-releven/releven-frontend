@@ -18,6 +18,7 @@ export const env = createEnv({
 			BUNDLE_ANALYZER: v.optional(v.picklist(["disabled", "enabled"]), "disabled"),
 			CI: v.optional(v.pipe(v.unknown(), v.transform(Boolean), v.boolean())),
 			NEXT_RUNTIME: v.optional(v.picklist(["edge", "nodejs"])),
+			RDFPROXY_ENDPOINT: v.pipe(v.string(), v.url()),
 		});
 
 		return v.parse(Schema, input);
@@ -56,6 +57,7 @@ export const env = createEnv({
 		NEXT_PUBLIC_REDMINE_ID: process.env.NEXT_PUBLIC_REDMINE_ID,
 		NEXT_RUNTIME: process.env.NEXT_RUNTIME,
 		NODE_ENV: process.env.NODE_ENV,
+		RDFPROXY_ENDPOINT: process.env.RDFPROXY_ENDPOINT,
 	},
 	validation: v.parse(
 		v.optional(v.picklist(["disabled", "enabled", "public"]), "enabled"),
