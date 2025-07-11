@@ -48,6 +48,7 @@
 		"lucide-react": "^0.511.0",
 		"next": "canary",
 		"next-intl": "^4.1.0",
+		"openapi-fetch": "^0.14.0",
 		"openapi-typescript": "^7.8.0",
 		"react": "^19.1.0",
 		"react-aria": "^3.40.0",
