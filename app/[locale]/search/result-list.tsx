@@ -1,3 +1,4 @@
+import { Image } from "@/components/image";
 import { Link } from "@/components/link";
 import { getSearchResults, type SearchParams } from "@/lib/data";
 
@@ -19,8 +20,21 @@ export async function ResultList(props: Readonly<ResultListProps>) {
 				{data.items.map((it) => {
 					return (
 						<li key={it.id}>
-							<div>
-								<Link href={`/${it.type}/${it.id}`}>{it.name}</Link>
+							<div className="mx-6 flex flex-col border-b-1 border-gray-200 py-6">
+								<Link
+									className="mb-2 text-lg font-medium text-primary"
+									href={`/${it.type}/${it.id}`}
+								>
+									<Image
+										alt={it.type}
+										className="inline"
+										height={32}
+										src={`/assets/images/people.svg`}
+										width={32}
+									/>
+									{it.name}
+								</Link>
+								<p>{it.description}</p>
 							</div>
 						</li>
 					);
