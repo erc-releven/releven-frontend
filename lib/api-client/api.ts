@@ -375,6 +375,12 @@ export interface components {
 			/** Ethnic Group Display Name */
 			ethnic_group_display_name?: string | null;
 		};
+		ExternalIdentifier: {
+			/** Id */
+			id?: string | null;
+			/** Person Id Assignment Identifier Plain */
+			person_id_assignment_identifier_plain?: string | null;
+		};
 		External_authority: {
 			/**
 			 * Id
@@ -403,8 +409,7 @@ export interface components {
 		IdentityInOtherServices: {
 			/** Id */
 			id?: string | null;
-			/** Person Id Assignment Identifier */
-			person_id_assignment_identifier?: string | null;
+			person_id_assignment_identifier?: components["schemas"]["ExternalIdentifier"] | null;
 			/** Person Id Assignment By */
 			person_id_assignment_by?: string | null;
 		};
@@ -426,12 +431,21 @@ export interface components {
 			/** Legal Status Display Name */
 			legal_status_display_name?: string | null;
 		};
+		NameOfPersonAssertion: {
+			/** Id */
+			id?: string | null;
+			/** Person Name Of Person Is */
+			person_name_of_person_is?: string | null;
+		};
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		OrderByEnum: "id";
 		/** Page[Author_group] */
 		Page_Author_group_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Author_group"]>
-				| Record<string, Array<components["schemas"]["Author_group"]>>;
+			items: Array<components["schemas"]["Author_group"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -444,9 +458,7 @@ export interface components {
 		/** Page[Bibliography] */
 		Page_Bibliography_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Bibliography"]>
-				| Record<string, Array<components["schemas"]["Bibliography"]>>;
+			items: Array<components["schemas"]["Bibliography"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -459,9 +471,7 @@ export interface components {
 		/** Page[Boulloterion] */
 		Page_Boulloterion_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Boulloterion"]>
-				| Record<string, Array<components["schemas"]["Boulloterion"]>>;
+			items: Array<components["schemas"]["Boulloterion"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -474,9 +484,7 @@ export interface components {
 		/** Page[Ethnic_group] */
 		Page_Ethnic_group_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Ethnic_group"]>
-				| Record<string, Array<components["schemas"]["Ethnic_group"]>>;
+			items: Array<components["schemas"]["Ethnic_group"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -489,9 +497,7 @@ export interface components {
 		/** Page[External_authority] */
 		Page_External_authority_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["External_authority"]>
-				| Record<string, Array<components["schemas"]["External_authority"]>>;
+			items: Array<components["schemas"]["External_authority"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -504,9 +510,7 @@ export interface components {
 		/** Page[Gender] */
 		Page_Gender_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Gender"]>
-				| Record<string, Array<components["schemas"]["Gender"]>>;
+			items: Array<components["schemas"]["Gender"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -519,9 +523,7 @@ export interface components {
 		/** Page[Language] */
 		Page_Language_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Language"]>
-				| Record<string, Array<components["schemas"]["Language"]>>;
+			items: Array<components["schemas"]["Language"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -534,9 +536,7 @@ export interface components {
 		/** Page[Legal_status] */
 		Page_Legal_status_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Legal_status"]>
-				| Record<string, Array<components["schemas"]["Legal_status"]>>;
+			items: Array<components["schemas"]["Legal_status"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -549,9 +549,7 @@ export interface components {
 		/** Page[Passage] */
 		Page_Passage_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Passage"]>
-				| Record<string, Array<components["schemas"]["Passage"]>>;
+			items: Array<components["schemas"]["Passage"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -564,9 +562,7 @@ export interface components {
 		/** Page[Person] */
 		Page_Person_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Person"]>
-				| Record<string, Array<components["schemas"]["Person"]>>;
+			items: Array<components["schemas"]["Person"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -579,9 +575,7 @@ export interface components {
 		/** Page[Place] */
 		Page_Place_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Place"]>
-				| Record<string, Array<components["schemas"]["Place"]>>;
+			items: Array<components["schemas"]["Place"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -594,9 +588,7 @@ export interface components {
 		/** Page[Publication] */
 		Page_Publication_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Publication"]>
-				| Record<string, Array<components["schemas"]["Publication"]>>;
+			items: Array<components["schemas"]["Publication"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -609,9 +601,7 @@ export interface components {
 		/** Page[Religious_affiliation] */
 		Page_Religious_affiliation_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Religious_affiliation"]>
-				| Record<string, Array<components["schemas"]["Religious_affiliation"]>>;
+			items: Array<components["schemas"]["Religious_affiliation"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -624,9 +614,7 @@ export interface components {
 		/** Page[Seal] */
 		Page_Seal_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Seal"]>
-				| Record<string, Array<components["schemas"]["Seal"]>>;
+			items: Array<components["schemas"]["Seal"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -639,9 +627,7 @@ export interface components {
 		/** Page[Seal_collection] */
 		Page_Seal_collection_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Seal_collection"]>
-				| Record<string, Array<components["schemas"]["Seal_collection"]>>;
+			items: Array<components["schemas"]["Seal_collection"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -654,9 +640,7 @@ export interface components {
 		/** Page[Social_relationship] */
 		Page_Social_relationship_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Social_relationship"]>
-				| Record<string, Array<components["schemas"]["Social_relationship"]>>;
+			items: Array<components["schemas"]["Social_relationship"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -669,9 +653,7 @@ export interface components {
 		/** Page[Written_text] */
 		Page_Written_text_: {
 			/** Items */
-			items:
-				| Array<components["schemas"]["Written_text"]>
-				| Record<string, Array<components["schemas"]["Written_text"]>>;
+			items: Array<components["schemas"]["Written_text"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -710,6 +692,8 @@ export interface components {
 			person_display_name?: string | null;
 			/** Person Id Assignment */
 			person_id_assignment: Array<components["schemas"]["IdentityInOtherServices"]>;
+			/** Person Name Of Person Assertion */
+			person_name_of_person_assertion: Array<components["schemas"]["NameOfPersonAssertion"]>;
 		};
 		PersonDetail: {
 			/**
@@ -722,7 +706,7 @@ export interface components {
 			/** Person Id Assignment */
 			person_id_assignment: Array<components["schemas"]["IdentityInOtherServices"]>;
 			/** Person Name Of Person Assertion */
-			person_name_of_person_assertion: Array<string>;
+			person_name_of_person_assertion: Array<components["schemas"]["NameOfPersonAssertion"]>;
 			/** Person Birth Of Person */
 			person_birth_of_person?: string | null;
 			/** Person Gender Assignment */
@@ -856,103 +840,6 @@ export interface components {
 			/** Written Text Version Of Assertion */
 			written_text_version_of_assertion: Array<string>;
 		};
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__1: "id" | "author_group_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__10: "id" | "person_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__11:
-			| "id"
-			| "place_display_name"
-			| "place_spatiotemporal_existence";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__12:
-			| "id"
-			| "publication_display_name"
-			| "publication_creation";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__13: "id" | "religious_affiliation_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__14: "id" | "seal_seal_id";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__15: "id" | "seal_collection_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__16: "id" | "social_relationship_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__17:
-			| "id"
-			| "written_text_display_name"
-			| "written_text_creation";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__2: "id";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__3:
-			| "id"
-			| "boulloterion_display_name"
-			| "boulloterion_ownership";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__4: "id" | "ethnic_group_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__5: "id" | "external_authority_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__6: "id" | "gender_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__7: "id" | "language_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__8: "id" | "legal_status_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__9: "id" | "passage_reference_string" | "passage_content";
 	};
 	responses: never;
 	parameters: never;
@@ -967,7 +854,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__1"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -997,7 +884,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__2"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1027,7 +914,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__3"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1057,7 +944,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__4"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1087,7 +974,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__5"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1117,7 +1004,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__6"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1147,7 +1034,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__7"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1177,7 +1064,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__8"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1207,7 +1094,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__9"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1237,7 +1124,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__10"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1294,7 +1181,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__11"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1324,7 +1211,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__12"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1354,7 +1241,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__13"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1384,7 +1271,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__14"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1414,7 +1301,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__15"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1444,7 +1331,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__16"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1474,7 +1361,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__17"] | null;
+				order_by?: components["schemas"]["OrderByEnum"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
