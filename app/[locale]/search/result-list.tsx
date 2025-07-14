@@ -1,6 +1,6 @@
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
-import { getSearchResults, type SearchParams } from "@/lib/data";
+import { getCachedSearchResults, type SearchParams } from "@/lib/data";
 
 import { ResultListNavigation } from "./result-list-navigation";
 
@@ -10,8 +10,7 @@ interface ResultListProps {
 
 export async function ResultList(props: Readonly<ResultListProps>) {
 	const { searchParams } = props;
-	const page = searchParams!.page ?? 1;
-	const data = await getSearchResults({ page: page });
+	const data = await getCachedSearchResults(searchParams);
 
 	return (
 		<>
