@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import { MainContent } from "@/components/ui/main-content";
+import type { SearchRecordType } from "@/lib/model";
 
 import { Filter } from "./filter";
 import { ResultList } from "./result-list";
@@ -9,6 +10,7 @@ import { SearchInput } from "./search-input";
 interface SearchPageProps {
 	searchParams?: Promise<{
 		page?: number;
+		type?: SearchRecordType;
 	}>;
 }
 
