@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { MainContent } from "@/components/ui/main-content";
 
 import { Filter } from "./filter";
@@ -24,7 +26,9 @@ export default async function SearchPage(props: Readonly<SearchPageProps>) {
 					<Filter />
 				</div>
 				<div className="grow bg-white p-6">
-					<ResultList searchParams={searchParams} />
+					<Suspense>
+						<ResultList searchParams={searchParams} />
+					</Suspense>
 				</div>
 			</div>
 		</MainContent>
