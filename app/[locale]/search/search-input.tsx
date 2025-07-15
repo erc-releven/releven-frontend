@@ -2,10 +2,12 @@
 import { type ReactNode, useState } from "react";
 import { SearchField } from "react-aria-components";
 
+import { Image } from "@/components/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { usePathname, useRouter, useSearchParams } from "@/lib/navigation/navigation";
+import searchIcon from "@/public/assets/images/magnifier.png";
 
 interface SearchInputProps {}
 
@@ -37,7 +39,13 @@ export function SearchInput(_props: Readonly<SearchInputProps>): ReactNode {
 					setSearchParams("search", searchTerm);
 				}}
 			>
-				{"🔎"}
+				<Image
+					alt={"search"}
+					className="brightness-[1000] saturate-[0]"
+					height={24}
+					src={searchIcon}
+					width={24}
+				/>
 			</Button>
 		</SearchField>
 	);
