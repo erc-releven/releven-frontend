@@ -111,6 +111,7 @@ function ResearchPlatformSection(): ReactNode {
 						<ImageCard
 							key={id}
 							description={ts(`${id}.description` as never)}
+							href={`/search?type=${id}`}
 							icon={`/assets/images/${id}.svg`}
 							image={card.icon}
 							subtitle={ts(`${id}.subtitle` as never)}

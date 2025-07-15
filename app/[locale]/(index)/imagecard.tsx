@@ -2,6 +2,7 @@ import type { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
+import { Link } from "@/components/link";
 import { ServerImage } from "@/components/server-image";
 import { Button } from "@/components/ui/button";
 
@@ -11,6 +12,7 @@ interface ImageCardProps {
 	title: string;
 	subtitle: string;
 	description: string;
+	href: string;
 }
 
 export function ImageCard(props: Readonly<ImageCardProps>): ReactNode {
@@ -35,7 +37,9 @@ export function ImageCard(props: Readonly<ImageCardProps>): ReactNode {
 			</div>
 			<div className="p-4">{props.description}</div>
 			<div className="relative w-full">
-				<Button className="absolute right-2 bottom-3 uppercase">{t("try_it_out")}</Button>
+				<Link href={props.href}>
+					<Button className="absolute right-2 bottom-3 uppercase">{t("try_it_out")}</Button>
+				</Link>
 			</div>
 		</div>
 	);

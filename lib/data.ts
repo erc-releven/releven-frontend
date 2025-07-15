@@ -21,7 +21,7 @@ function wrapPerson(item: components["schemas"]["Person"]): SearchRecord {
 		return person_name_of_person_is;
 	});
 	return {
-		type: "person",
+		type: "people",
 		id: item.id,
 		name: item.person_display_name!,
 		description: `known as ${names.join(", ")}`,
@@ -30,7 +30,7 @@ function wrapPerson(item: components["schemas"]["Person"]): SearchRecord {
 
 function wrapPlace(item: components["schemas"]["Place"]): SearchRecord {
 	return {
-		type: "place",
+		type: "places",
 		id: item.id,
 		name: "no",
 		description: "no",
@@ -39,7 +39,7 @@ function wrapPlace(item: components["schemas"]["Place"]): SearchRecord {
 
 function wrapText(item: components["schemas"]["Written_text"]): SearchRecord {
 	return {
-		type: "text",
+		type: "texts",
 		id: item.id,
 		name: item.written_text_display_name!,
 		description: "",
@@ -50,14 +50,14 @@ const typesToEndpoints: Record<
 	SearchRecordType,
 	{ path: keyof paths; wrapper: (data: never) => SearchRecord }
 > = {
-	person: { path: "/person", wrapper: wrapPerson },
-	place: { path: "/place", wrapper: wrapPlace },
-	text: { path: "/written_text", wrapper: wrapText },
+	people: { path: "/person", wrapper: wrapPerson },
+	places: { path: "/place", wrapper: wrapPlace },
+	texts: { path: "/written_text", wrapper: wrapText },
 };
 
 export async function getSearchResults(params?: SearchParams): Promise<SearchRecordResult> {
 	const page = params?.page ?? 1;
-	const type = params?.type ?? "person";
+	const type = params?.type ?? "people";
 	const data = (
 		await client.GET(typesToEndpoints[type].path, { params: { query: { page: page } } })
 	).data as any;

@@ -1,4 +1,4 @@
-export const searchRecordTypes = ["person", "place", "text"] as const;
+export const searchRecordTypes = ["people", "places", "texts"] as const;
 
 export type SearchRecordType = (typeof searchRecordTypes)[number];
 

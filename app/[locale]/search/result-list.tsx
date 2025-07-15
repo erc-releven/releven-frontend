@@ -28,9 +28,9 @@ export async function ResultList(props: Readonly<ResultListProps>) {
 										alt={it.type}
 										className="inline"
 										height={32}
-										src={`/assets/images/people.svg`}
+										src={`/assets/images/${it.type}.svg`}
 										width={32}
-									/>
+									/>{" "}
 									{it.name}
 								</Link>
 								<p>{it.description}</p>
