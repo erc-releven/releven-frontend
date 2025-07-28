@@ -29,14 +29,14 @@ export function ResultListNavigation(props: Readonly<ResultListNavigationProps>)
 	};
 
 	return (
-		<div className="flex justify-between">
+		<div className="mx-6 my-4 flex items-center justify-between">
 			<div>
 				{data.total} {"Result(s)"}
 			</div>
 			<ReactPaginate
 				activeLinkClassName="bg-primary text-white"
 				breakClassName="flex items-center px-3 py-3 text-gray-300"
-				containerClassName="flex flex-row"
+				containerClassName="flex flex-row items-center"
 				disableInitialCallback={true}
 				hrefBuilder={buildHref}
 				initialPage={data.page - 1}
