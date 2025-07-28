@@ -1,3 +1,4 @@
+/* eslint-disable playwright/prefer-web-first-assertions */
 import { createUrl, removeTrailingSlash } from "@acdh-oeaw/lib";
 
 import { env } from "@/config/env.config";

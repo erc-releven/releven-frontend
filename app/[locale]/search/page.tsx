@@ -4,16 +4,12 @@ import { MainContent } from "@/components/ui/main-content";
 import { type SearchRecordType, searchRecordTypes } from "@/lib/model";
 
 import { Filter } from "./filter";
-import { Radio } from "./radio";
 import { RadioGroup } from "./radio-group";
 import { ResultList } from "./result-list";
 import { SearchInput } from "./search-input";
 
 interface SearchPageProps {
-	searchParams?: Promise<{
-		page?: number;
-		type?: SearchRecordType;
-	}>;
+	searchParams?: Promise<{ page?: number; type?: SearchRecordType }>;
 }
 
 export default async function SearchPage(props: Readonly<SearchPageProps>) {
@@ -27,11 +23,11 @@ export default async function SearchPage(props: Readonly<SearchPageProps>) {
 				<div className="flex flex-col gap-4 bg-white p-6">
 					<span className="text-sm font-bold uppercase">{"Refine your search"}</span>
 					<Filter label={"Category"}>
-						<RadioGroup defaultValue={searchParams?.type} name={"type"}>
-							{searchRecordTypes.map((type) => {
-								return <Radio key={type} label={type} name={"type"} value={type} />;
-							})}
-						</RadioGroup>
+						<RadioGroup
+							defaultValue={searchParams?.type}
+							name={"type"}
+							options={searchRecordTypes as unknown as Array<string>}
+						/>
 					</Filter>
 					<Filter label={"Years active"} />
 				</div>
