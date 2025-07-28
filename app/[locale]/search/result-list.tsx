@@ -22,7 +22,7 @@ export async function ResultList(props: Readonly<ResultListProps>) {
 							<div className="mx-6 flex flex-col border-b-1 border-gray-200 py-6">
 								<Link
 									className="mb-2 text-lg font-medium text-primary"
-									href={`/${it.type}/${it.id}`}
+									href={`/${it.type}/${encodeURIComponent(it.id)}`}
 								>
 									<Image
 										alt={it.type}
