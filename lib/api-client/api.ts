@@ -152,15 +152,15 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
-	"/person": {
+	"/people": {
 		parameters: {
 			query?: never;
 			header?: never;
 			path?: never;
 			cookie?: never;
 		};
-		/** Releven Person */
-		get: operations["releven_person_person_get"];
+		/** Releven People */
+		get: operations["releven_people_people_get"];
 		put?: never;
 		post?: never;
 		delete?: never;
@@ -169,15 +169,15 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
-	"/person/detail": {
+	"/people/detail": {
 		parameters: {
 			query?: never;
 			header?: never;
 			path?: never;
 			cookie?: never;
 		};
-		/** Releven Person Detail */
-		get: operations["releven_person_detail_person_detail_get"];
+		/** Releven People Detail */
+		get: operations["releven_people_detail_people_detail_get"];
 		put?: never;
 		post?: never;
 		delete?: never;
@@ -288,15 +288,32 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
-	"/written_text": {
+	"/text": {
 		parameters: {
 			query?: never;
 			header?: never;
 			path?: never;
 			cookie?: never;
 		};
-		/** Releven Written Text */
-		get: operations["releven_written_text_written_text_get"];
+		/** Releven Text */
+		get: operations["releven_text_text_get"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/text/detail": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Releven Text Detail */
+		get: operations["releven_text_detail_text_detail_get"];
 		put?: never;
 		post?: never;
 		delete?: never;
@@ -329,6 +346,69 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
 	schemas: {
+		AuthorAssertion: {
+			/** Id */
+			id?: string | null;
+			written_text_creation_author_is?: components["schemas"]["AuthorAssertion_Person"] | null;
+			/** Written Text Creation Author Are */
+			written_text_creation_author_are?: string | null;
+			written_text_creation_author_by?: components["schemas"]["AuthorAssertion_Person"] | null;
+			/** Written Text Creation Author By Group */
+			written_text_creation_author_by_group?: string | null;
+			written_text_creation_author_src?: components["schemas"]["AuthorAssertion_Passage"] | null;
+			/** Written Text Creation Author Based */
+			written_text_creation_author_based?: string | null;
+		};
+		AuthorAssertion_Passage: {
+			/** Id */
+			id?: string | null;
+			/** Passage Reference String */
+			passage_reference_string?: string | null;
+			/** Passage Content */
+			passage_content?: string | null;
+			/** Passage In Publication Assertion */
+			passage_in_publication_assertion: Array<string>;
+			/** Passage On Object Assertion */
+			passage_on_object_assertion: Array<string>;
+			/** Passage On Boulloterion Assertion */
+			passage_on_boulloterion_assertion: Array<string>;
+			/** Passage Text Language Assertion */
+			passage_text_language_assertion: Array<string>;
+		};
+		AuthorAssertion_Person: {
+			/** Id */
+			id?: string | null;
+			/** Person Display Name */
+			person_display_name?: string | null;
+			/** Person Id Assignment */
+			person_id_assignment: Array<string>;
+			/** Person Name Of Person Assertion */
+			person_name_of_person_assertion: Array<string>;
+			/** Person Birth Of Person */
+			person_birth_of_person?: string | null;
+			/** Person Gender Assignment */
+			person_gender_assignment: Array<string>;
+			/** Person Ethnic Group Membership Assertion */
+			person_ethnic_group_membership_assertion: Array<string>;
+			/** Person Population Membership Assertion */
+			person_population_membership_assertion: Array<string>;
+			/** Person Part Of Manifest Group Assertion */
+			person_part_of_manifest_group_assertion: Array<string>;
+			/** Person Social Relationship */
+			person_social_relationship: Array<string>;
+			/** Person Language Skill */
+			person_language_skill: Array<string>;
+			/** Person Social Role */
+			person_social_role: Array<string>;
+			/** Person Legal Role */
+			person_legal_role: Array<string>;
+			/** Person Religious Affiliation */
+			person_religious_affiliation: Array<string>;
+			/** Person Possession Assertion */
+			person_possession_assertion: Array<string>;
+			/** Person Death Of Person */
+			person_death_of_person?: string | null;
+		};
 		Author_group: {
 			/**
 			 * Id
@@ -559,10 +639,10 @@ export interface components {
 			/** Pages */
 			pages: number;
 		};
-		/** Page[Person] */
-		Page_Person_: {
+		/** Page[People] */
+		Page_People_: {
 			/** Items */
-			items: Array<components["schemas"]["Person"]>;
+			items: Array<components["schemas"]["People"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -650,10 +730,10 @@ export interface components {
 			/** Pages */
 			pages: number;
 		};
-		/** Page[Written_text] */
-		Page_Written_text_: {
+		/** Page[Text] */
+		Page_Text_: {
 			/** Items */
-			items: Array<components["schemas"]["Written_text"]>;
+			items: Array<components["schemas"]["Text"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -682,7 +762,7 @@ export interface components {
 			/** Passage Text Language Assertion */
 			passage_text_language_assertion: Array<string>;
 		};
-		Person: {
+		People: {
 			/**
 			 * Id
 			 * Format: uri
@@ -695,7 +775,7 @@ export interface components {
 			/** Person Name Of Person Assertion */
 			person_name_of_person_assertion: Array<components["schemas"]["NameOfPersonAssertion"]>;
 		};
-		PersonDetail: {
+		PeopleDetail: {
 			/**
 			 * Id
 			 * Format: uri
@@ -812,16 +892,7 @@ export interface components {
 			/** Social Relationship Categorisation Assertion */
 			social_relationship_categorisation_assertion: Array<string>;
 		};
-		/** ValidationError */
-		ValidationError: {
-			/** Location */
-			loc: Array<string | number>;
-			/** Message */
-			msg: string;
-			/** Error Type */
-			type: string;
-		};
-		Written_text: {
+		Text: {
 			/**
 			 * Id
 			 * Format: uri
@@ -831,14 +902,68 @@ export interface components {
 			written_text_display_name?: string | null;
 			/** Written Text Title Assertion */
 			written_text_title_assertion: Array<string>;
-			/** Written Text Creation */
-			written_text_creation?: string | null;
+			written_text_creation?: components["schemas"]["releven_text__Creation"] | null;
 			/** Written Text Published As Assertion */
 			written_text_published_as_assertion: Array<string>;
 			/** Written Text Written In Assertion */
 			written_text_written_in_assertion: Array<string>;
 			/** Written Text Version Of Assertion */
 			written_text_version_of_assertion: Array<string>;
+		};
+		TextDetail: {
+			/**
+			 * Id
+			 * Format: uri
+			 */
+			id: string;
+			/** Written Text Display Name */
+			written_text_display_name?: string | null;
+			/** Written Text Title Assertion */
+			written_text_title_assertion: Array<string>;
+			written_text_creation?: components["schemas"]["releven_text_detail__Creation"] | null;
+			/** Written Text Published As Assertion */
+			written_text_published_as_assertion: Array<string>;
+			/** Written Text Written In Assertion */
+			written_text_written_in_assertion: Array<string>;
+			/** Written Text Version Of Assertion */
+			written_text_version_of_assertion: Array<string>;
+		};
+		/** ValidationError */
+		ValidationError: {
+			/** Location */
+			loc: Array<string | number>;
+			/** Message */
+			msg: string;
+			/** Error Type */
+			type: string;
+		};
+		releven_text__Creation: {
+			/** Id */
+			id?: string | null;
+			/** Written Text Creation Time Frame Assertion */
+			written_text_creation_time_frame_assertion: Array<string>;
+			/** Written Text Creation Author Assertion */
+			written_text_creation_author_assertion: Array<string>;
+			/** Written Text Creation Place Assertion */
+			written_text_creation_place_assertion: Array<string>;
+			/** Written Text Creation Copied From Assertion */
+			written_text_creation_copied_from_assertion: Array<string>;
+			/** Written Text Creation Translated From Assertion */
+			written_text_creation_translated_from_assertion: Array<string>;
+		};
+		releven_text_detail__Creation: {
+			/** Id */
+			id?: string | null;
+			/** Written Text Creation Time Frame Assertion */
+			written_text_creation_time_frame_assertion: Array<string>;
+			/** Written Text Creation Author Assertion */
+			written_text_creation_author_assertion: Array<components["schemas"]["AuthorAssertion"]>;
+			/** Written Text Creation Place Assertion */
+			written_text_creation_place_assertion: Array<string>;
+			/** Written Text Creation Copied From Assertion */
+			written_text_creation_copied_from_assertion: Array<string>;
+			/** Written Text Creation Translated From Assertion */
+			written_text_creation_translated_from_assertion: Array<string>;
 		};
 	};
 	responses: never;
@@ -1119,7 +1244,7 @@ export interface operations {
 			};
 		};
 	};
-	releven_person_person_get: {
+	releven_people_people_get: {
 		parameters: {
 			query?: {
 				page?: number;
@@ -1137,7 +1262,7 @@ export interface operations {
 			200: {
 				headers: Record<string, unknown>;
 				content: {
-					"application/json": components["schemas"]["Page_Person_"];
+					"application/json": components["schemas"]["Page_People_"];
 				};
 			};
 			/** @description Validation Error */
@@ -1149,7 +1274,7 @@ export interface operations {
 			};
 		};
 	};
-	releven_person_detail_person_detail_get: {
+	releven_people_detail_people_detail_get: {
 		parameters: {
 			query: {
 				id: string;
@@ -1164,7 +1289,7 @@ export interface operations {
 			200: {
 				headers: Record<string, unknown>;
 				content: {
-					"application/json": components["schemas"]["PersonDetail"];
+					"application/json": components["schemas"]["PeopleDetail"];
 				};
 			};
 			/** @description Validation Error */
@@ -1356,7 +1481,7 @@ export interface operations {
 			};
 		};
 	};
-	releven_written_text_written_text_get: {
+	releven_text_text_get: {
 		parameters: {
 			query?: {
 				page?: number;
@@ -1374,7 +1499,34 @@ export interface operations {
 			200: {
 				headers: Record<string, unknown>;
 				content: {
-					"application/json": components["schemas"]["Page_Written_text_"];
+					"application/json": components["schemas"]["Page_Text_"];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["HTTPValidationError"];
+				};
+			};
+		};
+	};
+	releven_text_detail_text_detail_get: {
+		parameters: {
+			query: {
+				id: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["TextDetail"];
 				};
 			};
 			/** @description Validation Error */

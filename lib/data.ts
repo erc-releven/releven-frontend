@@ -16,7 +16,7 @@ export interface SearchParams {
 	page?: number;
 }
 
-function wrapPerson(item: components["schemas"]["Person"]): SearchRecord {
+function wrapPerson(item: components["schemas"]["People"]): SearchRecord {
 	const names = item.person_name_of_person_assertion.map(({ person_name_of_person_is }) => {
 		return person_name_of_person_is;
 	});
@@ -37,7 +37,7 @@ function wrapPlace(item: components["schemas"]["Place"]): SearchRecord {
 	};
 }
 
-function wrapText(item: components["schemas"]["Written_text"]): SearchRecord {
+function wrapText(item: components["schemas"]["Text"]): SearchRecord {
 	return {
 		type: "texts",
 		id: item.id,
@@ -50,9 +50,9 @@ const typesToEndpoints: Record<
 	SearchRecordType,
 	{ path: keyof paths; wrapper: (data: never) => SearchRecord }
 > = {
-	people: { path: "/person", wrapper: wrapPerson },
+	people: { path: "/people", wrapper: wrapPerson },
 	places: { path: "/place", wrapper: wrapPlace },
-	texts: { path: "/written_text", wrapper: wrapText },
+	texts: { path: "/text", wrapper: wrapText },
 };
 
 export async function getSearchResults(params?: SearchParams): Promise<SearchRecordResult> {

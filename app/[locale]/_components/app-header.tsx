@@ -23,7 +23,7 @@ export function AppHeader(): ReactNode {
 			children: {
 				people: {
 					type: "link",
-					href: createHref({ pathname: "/search?type=person" }),
+					href: createHref({ pathname: "/search?type=people" }),
 					label: t("navigation.items.resources.people.title"),
 				},
 				places: {
