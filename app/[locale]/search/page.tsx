@@ -19,7 +19,7 @@ export default async function SearchPage(props: Readonly<SearchPageProps>) {
 			<div className="flex basis-36 flex-col items-center justify-center bg-[#FBF7F0] bg-[linear-gradient(to_right,rgba(251,247,240,1),rgba(251,247,240,0)),url('/assets/images/leader.png')] bg-contain bg-right bg-no-repeat">
 				<SearchInput />
 			</div>
-			<div className="flex w-full flex-row gap-6 bg-gray-100 px-8 pt-8">
+			<div className="flex w-full grow flex-row gap-6 bg-gray-100 p-8">
 				<div className="flex flex-col gap-4 bg-white p-6">
 					<span className="text-sm font-bold uppercase">{"Refine your search"}</span>
 					<Filter label={"Category"}>
