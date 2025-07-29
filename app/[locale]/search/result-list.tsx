@@ -44,6 +44,10 @@ export async function ResultList(props: Readonly<ResultListProps>) {
 			</>
 		);
 	} else {
-		return <div className="m-auto text-lg font-medium text-primary">{"no results found"}</div>;
+		return (
+			<div className="m-8 text-center text-lg font-medium text-primary">
+				{"your search yielded no results"}
+			</div>
+		);
 	}
 }

@@ -2,7 +2,6 @@ import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
 import { AppNavigation, AppNavigationMobile } from "@/app/[locale]/_components/app-navigation";
-import { ColorSchemeSwitcher } from "@/app/[locale]/_components/color-scheme-switcher";
 import { createHref } from "@/lib/navigation/create-href";
 import type { NavigationItem } from "@/lib/navigation/navigation";
 
@@ -56,10 +55,6 @@ export function AppHeader(): ReactNode {
 					label={label}
 					navigation={navigation}
 				/>
-
-				<div className="flex items-center gap-x-6">
-					<ColorSchemeSwitcher />
-				</div>
 			</div>
 		</header>
 	);
