@@ -11,11 +11,6 @@ import type { SearchRecord, SearchRecordResult, SearchRecordType } from "./model
 
 export const client = createClient<paths>({ baseUrl: env.NEXT_PUBLIC_RDFPROXY_ENDPOINT });
 
-export interface SearchParams {
-	type?: SearchRecordType; // TODO add validation
-	page?: number;
-}
-
 function wrapPerson(item: components["schemas"]["People"]): SearchRecord {
 	const names = item.person_name_of_person_assertion.map(({ person_name_of_person_is }) => {
 		return person_name_of_person_is;
@@ -55,9 +50,10 @@ const typesToEndpoints: Record<
 	texts: { path: "/text", wrapper: wrapText },
 };
 
-export async function getSearchResults(params?: SearchParams): Promise<SearchRecordResult> {
-	const page = params?.page ?? 1;
-	const type = params?.type ?? "people";
+export async function getSearchResults(
+	type: SearchRecordType = "people",
+	page = 1,
+): Promise<SearchRecordResult> {
 	const data = (
 		await client.GET(typesToEndpoints[type].path, { params: { query: { page: page } } })
 	).data as any;

@@ -1,16 +1,20 @@
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
-import { getCachedSearchResults, type SearchParams } from "@/lib/data";
+import { getCachedSearchResults } from "@/lib/data";
+import type { SearchRecordType } from "@/lib/model";
 
 import { ResultListNavigation } from "./result-list-navigation";
 
 interface ResultListProps {
-	searchParams?: SearchParams;
+	searchParams?: {
+		type?: SearchRecordType; // TODO add validation
+		page?: number;
+	};
 }
 
 export async function ResultList(props: Readonly<ResultListProps>) {
 	const { searchParams } = props;
-	const data = await getCachedSearchResults(searchParams);
+	const data = await getCachedSearchResults(searchParams?.type, searchParams?.page);
 
 	if (data.total) {
 		return (
