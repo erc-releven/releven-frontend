@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import { MainContent } from "@/components/ui/main-content";
 import { client } from "@/lib/data";
 
@@ -9,12 +11,16 @@ interface DetailPageProps {
 
 export default async function PeoplePage(props: Readonly<DetailPageProps>) {
 	const id = decodeURIComponent(props.params.id);
-	const details = (await client.GET("/people/detail", { params: { query: { id: id } } })).data!;
-	return (
-		<MainContent className="mx-auto w-full max-w-screen-xl px-4">
-			<h1>{details.person_display_name}</h1>
-			<pre>{JSON.stringify(details, null, 2)}</pre>
-			<div></div>
-		</MainContent>
-	);
+	const details = await client.GET("/people/detail", { params: { query: { id: id } } });
+	if (details.data) {
+		return (
+			<MainContent className="mx-auto w-full max-w-screen-xl px-4">
+				<h1>{details.data.person_display_name}</h1>
+				<pre>{JSON.stringify(details, null, 2)}</pre>
+				<div></div>
+			</MainContent>
+		);
+	} else {
+		notFound();
+	}
 }
