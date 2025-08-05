@@ -2,14 +2,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import createClient from "openapi-fetch";
-import { cache } from "react";
 
 import { env } from "@/config/env.config";
 
 import type { components, paths } from "./api-client/api";
 import type { SearchRecord, SearchRecordResult, SearchRecordType } from "./model";
 
-export const client = createClient<paths>({ baseUrl: env.NEXT_PUBLIC_RDFPROXY_ENDPOINT });
+export const client = createClient<paths>({
+	baseUrl: env.NEXT_PUBLIC_RDFPROXY_ENDPOINT,
+	cache: "force-cache", // TODO reconsider this?
+});
 
 function wrapPerson(item: components["schemas"]["People"]): SearchRecord {
 	const names = item.person_name_of_person_assertion.map(({ person_name_of_person_is }) => {
@@ -55,15 +57,15 @@ export async function getSearchResults(
 	page = 1,
 ): Promise<SearchRecordResult> {
 	const data = (
-		await client.GET(typesToEndpoints[type].path, { params: { query: { page: page } } })
+		await client.GET(typesToEndpoints[type].path, {
+			params: { query: { page: page } },
+		})
 	).data as any;
 	return {
-		page: data.page!,
-		pages: data.pages!,
-		total: data.total!,
+		page: data.page,
+		pages: data.pages,
+		total: data.total,
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-		items: data.items!.map(typesToEndpoints[type].wrapper),
+		items: data.items.map(typesToEndpoints[type].wrapper),
 	};
 }
-
-export const getCachedSearchResults = cache(getSearchResults);
