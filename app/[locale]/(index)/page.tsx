@@ -96,9 +96,9 @@ function ResearchPlatformSection(): ReactNode {
 	const ts = useTranslations("AppHeader.navigation.items.resources");
 
 	const cards = {
-		people: { icon: personImage },
-		places: { icon: placeImage },
-		texts: { icon: textImage },
+		people: { icon: personImage, path: "/people" as const },
+		places: { icon: placeImage, path: "/place" as const },
+		texts: { icon: textImage, path: "/text" as const },
 	};
 
 	return (
@@ -110,11 +110,11 @@ function ResearchPlatformSection(): ReactNode {
 					return (
 						<ImageCard
 							key={id}
+							countPath={card.path}
 							description={ts(`${id}.description` as never)}
 							href={`/search?type=${id}`}
 							icon={`/assets/images/${id}.svg`}
 							image={card.icon}
-							subtitle={ts(`${id}.subtitle` as never)}
 							title={ts(`${id}.title` as never)}
 						/>
 					);

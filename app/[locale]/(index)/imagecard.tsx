@@ -1,16 +1,19 @@
 import type { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { useTranslations } from "next-intl";
-import type { ReactNode } from "react";
+import { type ReactNode, Suspense } from "react";
 
 import { Link } from "@/components/link";
 import { ServerImage } from "@/components/server-image";
 import { Button } from "@/components/ui/button";
+import type { paths } from "@/lib/api-client/api";
+
+import { DataCount } from "./data-count";
 
 interface ImageCardProps {
 	icon: string | StaticImport;
 	image: string | StaticImport;
 	title: string;
-	subtitle: string;
+	countPath: keyof paths;
 	description: string;
 	href: string;
 }
@@ -29,7 +32,11 @@ export function ImageCard(props: Readonly<ImageCardProps>): ReactNode {
 				/>
 				<div className="w-full text-nowrap">
 					<span className="block text-lg font-medium">{props.title}</span>
-					<span className="block">{props.subtitle}</span>
+					<span className="block">
+						<Suspense>
+							<DataCount path={props.countPath} />
+						</Suspense>
+					</span>
 				</div>
 			</div>
 			<div className="relative">
