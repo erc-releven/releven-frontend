@@ -6,38 +6,33 @@ import { Image } from "@/components/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { usePathname, useRouter, useSearchParams } from "@/lib/navigation/navigation";
 import searchIcon from "@/public/assets/images/magnifier.png";
 
-interface SearchInputProps {}
+interface SearchInputProps {
+	searchTerm: string;
+	setSearchTerm: (arg0: string) => unknown;
+}
 
-export function SearchInput(_props: Readonly<SearchInputProps>): ReactNode {
-	const { replace } = useRouter();
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
-	const setSearchParams = (key: string, value: string) => {
-		const params = new URLSearchParams(searchParams);
-		params.set(key, value);
-		replace(`${pathname}?${params.toString()}`);
-	};
-
-	const [searchTerm, setSearchTerm] = useState(searchParams.get("search") ?? "");
+export function SearchInput(props: Readonly<SearchInputProps>): ReactNode {
+	const { searchTerm, setSearchTerm } = props;
+	const [localTerm, setLocalTerm] = useState(searchTerm);
 	return (
-		<SearchField className="flex flex-row">
-			<Label></Label>
-			<Input
-				className="w-80 rounded-l-full"
-				onChange={(e) => {
-					setSearchTerm(e.target.value);
+		<div className="flex flex-row">
+			<SearchField
+				onChange={setLocalTerm}
+				onSubmit={() => {
+					setSearchTerm(localTerm);
 				}}
-				placeholder="Search"
-				value={searchTerm}
-			/>
+			>
+				<Label></Label>
+				<Input className="w-80 rounded-l-full" placeholder="Search" value={localTerm} />
+			</SearchField>
 			<Button
 				className="w-16 rounded-r-full"
 				onClick={() => {
-					setSearchParams("search", searchTerm);
+					setSearchTerm(localTerm);
 				}}
+				type="submit"
 			>
 				<Image
 					alt={"search"}
@@ -47,6 +42,6 @@ export function SearchInput(_props: Readonly<SearchInputProps>): ReactNode {
 					width={24}
 				/>
 			</Button>
-		</SearchField>
+		</div>
 	);
 }

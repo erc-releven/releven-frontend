@@ -1,4 +1,5 @@
 import { NextIntlClientProvider } from "next-intl";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import type { ReactNode } from "react";
 
 import { AriaProviders } from "@/app/[locale]/_components/aria-providers";
@@ -16,7 +17,9 @@ export function Providers(props: Readonly<ProvidersProps>): ReactNode {
 
 	return (
 		<NextIntlClientProvider locale={locale} messages={messages}>
-			<AriaProviders locale={locale}>{children}</AriaProviders>
+			<AriaProviders locale={locale}>
+				<NuqsAdapter>{children}</NuqsAdapter>
+			</AriaProviders>
 		</NextIntlClientProvider>
 	);
 }

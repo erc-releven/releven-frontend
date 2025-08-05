@@ -1,26 +1,40 @@
+"use client";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
 import { getSearchResults } from "@/lib/data";
 import type { SearchRecordType } from "@/lib/model";
 
+import { LoadingDiv } from "../_components/loading-div";
 import { ResultListNavigation } from "./result-list-navigation";
 
-interface ResultListProps {
-	searchParams?: {
-		type?: SearchRecordType; // TODO add validation
-		page?: number;
-	};
+export interface ResultListProps {
+	page: number;
+	query: string;
+	type: SearchRecordType;
+	setType: (arg0: SearchRecordType) => unknown;
+	setPage: (arg0: number) => unknown;
 }
 
-export async function ResultList(props: Readonly<ResultListProps>) {
-	const { searchParams } = props;
-	try {
-		const data = await getSearchResults(searchParams?.type, searchParams?.page);
-
-		if (data.total) {
-			return (
-				<>
-					<ResultListNavigation data={data} />
+export function ResultList(props: Readonly<ResultListProps>) {
+	const { type, page } = props;
+	const { isLoading, isError, isPlaceholderData, data, error } = useQuery({
+		queryFn: () => {
+			return getSearchResults(type, page);
+		},
+		queryKey: [type, page],
+		placeholderData: keepPreviousData,
+	});
+	if (isError) {
+		return <div>{new String(error)}</div>;
+	} else {
+		return (
+			<>
+				<ResultListNavigation data={data} searchProps={props} />
+				{isLoading || isPlaceholderData ? (
+					<LoadingDiv />
+				) : data ? (
 					<ul>
 						{data.items.map((it) => {
 							return (
@@ -45,17 +59,13 @@ export async function ResultList(props: Readonly<ResultListProps>) {
 							);
 						})}
 					</ul>
-					<ResultListNavigation data={data} />
-				</>
-			);
-		}
-	} catch (error) {
-		// error or no data
-		return <div>{new String(error)}</div>;
+				) : (
+					<div className="m-8 text-center text-lg font-medium text-primary">
+						{"your search yielded no results"}
+					</div>
+				)}
+				<ResultListNavigation data={data} searchProps={props} />
+			</>
+		);
 	}
-	return (
-		<div className="m-8 text-center text-lg font-medium text-primary">
-			{"your search yielded no results"}
-		</div>
-	);
 }
