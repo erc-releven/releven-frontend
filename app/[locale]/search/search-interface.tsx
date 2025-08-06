@@ -1,8 +1,9 @@
 "use client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { parseAsInteger, parseAsString, parseAsStringLiteral, useQueryState } from "nuqs";
+import { useCallback } from "react";
 
-import { searchRecordTypes } from "@/lib/model";
+import { type SearchRecordType, searchRecordTypes } from "@/lib/model";
 
 import { Filter } from "./filter";
 import { RadioGroup } from "./radio-group";
@@ -14,12 +15,26 @@ const queryClient = new QueryClient();
 interface SearchInterfaceProps {}
 
 export function SearchInterface(_props: Readonly<SearchInterfaceProps>) {
-	const [searchTerm, setSearchTerm] = useQueryState("q", parseAsString.withDefault(""));
-	const [type, setType] = useQueryState(
+	const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
+	const [searchTerm, setSearchTermDirectly] = useQueryState("q", parseAsString.withDefault(""));
+	const setSearchTerm = useCallback(
+		(value: string | null = null) => {
+			void setPage(null);
+			void setSearchTermDirectly(value);
+		},
+		[setPage, setSearchTermDirectly],
+	);
+	const [type, setTypeDirectly] = useQueryState(
 		"type",
 		parseAsStringLiteral(searchRecordTypes).withDefault(searchRecordTypes[0]),
 	);
-	const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
+	const setType = useCallback(
+		(value: SearchRecordType) => {
+			void setPage(null);
+			void setTypeDirectly(value);
+		},
+		[setPage, setTypeDirectly],
+	);
 	return (
 		<>
 			<div className="flex basis-36 flex-col items-center justify-center bg-[#FBF7F0] bg-[linear-gradient(to_right,rgba(251,247,240,1),rgba(251,247,240,0)),url('/assets/images/leader.png')] bg-contain bg-right bg-no-repeat">
@@ -32,6 +47,7 @@ export function SearchInterface(_props: Readonly<SearchInterfaceProps>) {
 						<RadioGroup
 							defaultValue={type}
 							name={"type"}
+							onValueChange={setType}
 							options={searchRecordTypes as unknown as Array<string>}
 						/>
 					</Filter>
