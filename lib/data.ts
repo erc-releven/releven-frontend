@@ -14,14 +14,18 @@ export const client = createClient<paths>({
 });
 
 function wrapPerson(item: components["schemas"]["People"]): SearchRecord {
-	const names = item.person_name_of_person_assertion.map(({ person_name_of_person_is }) => {
-		return person_name_of_person_is;
-	});
+	const names = item.person_name_of_person_assertion
+		.map(({ person_name_of_person_is }) => {
+			return person_name_of_person_is;
+		})
+		.filter((v) => {
+			return v;
+		});
 	return {
 		type: "people",
 		id: item.id,
 		name: item.person_display_name!,
-		description: `known as ${names.join(", ")}`,
+		description: names.length ? `known as ${names.join(", ")}` : "",
 	};
 }
 
