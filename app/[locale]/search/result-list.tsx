@@ -18,12 +18,12 @@ export interface ResultListProps {
 }
 
 export function ResultList(props: Readonly<ResultListProps>) {
-	const { type, page } = props;
+	const { type, page, query } = props;
 	const { isLoading, isError, isPlaceholderData, data, error } = useQuery({
 		queryFn: () => {
-			return getSearchResults(type, page);
+			return getSearchResults(type, page, query);
 		},
-		queryKey: [type, page],
+		queryKey: [type, page, query],
 		placeholderData: keepPreviousData,
 	});
 	if (isError) {

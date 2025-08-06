@@ -55,10 +55,11 @@ const typesToEndpoints: Record<
 export async function getSearchResults(
 	type: SearchRecordType = "people",
 	page = 1,
+	query = "",
 ): Promise<SearchRecordResult> {
 	const data = (
 		await client.GET(typesToEndpoints[type].path, {
-			params: { query: { page: page } },
+			params: { query: { page: page, query: query } },
 		})
 	).data as any;
 	return {
