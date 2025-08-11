@@ -38,7 +38,7 @@ export default async function StaticPage(props: Readonly<StaticPageProps>): Prom
 		const vfile = await read(filePath);
 		const result = await processor.process(vfile);
 		return (
-			<MainContent className="m-auto w-2xl">
+			<MainContent className="mx-auto w-2xl">
 				<section dangerouslySetInnerHTML={{ __html: String(result) }} className="prose" />
 			</MainContent>
 		);

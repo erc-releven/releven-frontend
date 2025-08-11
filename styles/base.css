@@ -95,4 +95,24 @@
 	h2 {
 		@apply font-extrabold mb-2 mt-6 text-lg text-primary uppercase;
 	}
+
+	.prose {
+		@apply font-light;
+
+		a {
+			@apply text-primary;
+
+			:hover {
+				@apply underline;
+			}
+		}
+
+		li {
+			@apply list-disc my-2;
+		}
+
+		p {
+			@apply my-2;
+		}
+	}
 }
