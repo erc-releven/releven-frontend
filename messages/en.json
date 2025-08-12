@@ -148,5 +148,27 @@
 			"title": "Page not found"
 		},
 		"title": "Page not found"
+	},
+	"SearchPage": {
+		"filter": {
+			"headline": "Refine your search",
+			"category": "Category",
+			"categories": {
+				"people": "People",
+				"places": "People",
+				"texts": "People"
+			}
+		},
+		"result-list": {
+			"navigation": {
+				"results": "results"
+			},
+			"sort-by": {
+				"default": "sort",
+				"people": { "person_display_name": "Name" },
+				"places": {},
+				"texts": {}
+			}
+		}
 	}
 }
