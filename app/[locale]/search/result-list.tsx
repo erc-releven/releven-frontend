@@ -14,7 +14,7 @@ export interface ResultListProps {
 	page: number;
 	query: string;
 	type: SearchRecordType;
-	setOrderBy: (arg0: string) => unknown;
+	setOrderBy: (arg0: string | null) => unknown;
 	setPage: (arg0: number) => unknown;
 	setType: (arg0: SearchRecordType) => unknown;
 }

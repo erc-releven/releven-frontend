@@ -1,10 +1,11 @@
-"use client";
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
+import { Collection } from "react-aria-components";
 import ReactPaginate from "react-paginate";
 
 import { ListBox, ListBoxItem } from "@/components/ui/listbox";
 import { Popover } from "@/components/ui/popover";
-import { Select, SelectTrigger } from "@/components/ui/select";
+import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { SearchRecordResult } from "@/lib/model";
 
 import type { ResultListProps } from "./result-list";
@@ -15,8 +16,21 @@ interface ResultListNavigationProps {
 }
 
 export function ResultListNavigation(props: Readonly<ResultListNavigationProps>): ReactNode {
+	const t = useTranslations("SearchPage.result-list");
+
 	const { data, searchProps } = props;
-	const sort = ["name", "relevance"]; // TODO
+	const sort = [
+		// TODO handle null default more nicely
+		// {
+		// 	id: "",
+		// 	name: "",
+		// },
+		{
+			id: "person_display_name",
+			name: t("sort-by.people.person_display_name"),
+		},
+		// { id: "assertion_count", name: "relevance" },
+	];
 
 	return data ? (
 		<div className="mx-6 my-4 flex items-center justify-between">
@@ -42,17 +56,25 @@ export function ResultListNavigation(props: Readonly<ResultListNavigationProps>)
 				previousLabel={"<"}
 				previousLinkClassName="flex items-center px-3 py-2 text-gray-300"
 			/>
-			<Select>
-				<SelectTrigger>{`sort by: ${sort[0]!}`}</SelectTrigger>
+			<Select
+				onSelectionChange={(key) => {
+					searchProps.setOrderBy(key as string);
+				}}
+			>
+				<SelectTrigger>
+					<SelectValue />
+				</SelectTrigger>
 				<Popover>
 					<ListBox>
-						{sort.map((option) => {
-							return (
-								<ListBoxItem key={option} textValue={""}>
-									{option}
-								</ListBoxItem>
-							);
-						})}
+						<Collection items={sort}>
+							{(item) => {
+								return (
+									<ListBoxItem key={item.id} textValue={item.name}>
+										{item.name}
+									</ListBoxItem>
+								);
+							}}
+						</Collection>
 					</ListBox>
 				</Popover>
 			</Select>
