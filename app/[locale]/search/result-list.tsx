@@ -10,20 +10,22 @@ import { LoadingDiv } from "../_components/loading-div";
 import { ResultListNavigation } from "./result-list-navigation";
 
 export interface ResultListProps {
+	orderBy: string | null; // FIXME type using API paths
 	page: number;
 	query: string;
 	type: SearchRecordType;
-	setType: (arg0: SearchRecordType) => unknown;
+	setOrderBy: (arg0: string) => unknown;
 	setPage: (arg0: number) => unknown;
+	setType: (arg0: SearchRecordType) => unknown;
 }
 
 export function ResultList(props: Readonly<ResultListProps>) {
-	const { type, page, query } = props;
+	const { orderBy, type, page, query } = props;
 	const { isLoading, isError, isPlaceholderData, data, error } = useQuery({
 		queryFn: () => {
-			return getSearchResults(type, page, query);
+			return getSearchResults(type, page, query, orderBy);
 		},
-		queryKey: [type, page, query],
+		queryKey: [type, page, query, orderBy],
 		placeholderData: keepPreviousData,
 	});
 	if (isError) {

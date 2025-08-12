@@ -24,6 +24,10 @@ export function SearchInterface(_props: Readonly<SearchInterfaceProps>) {
 		},
 		[setPage, setSearchTermDirectly],
 	);
+
+	// TODO parseAsStringLiteral of current type's orderby enum
+	const [orderBy, setOrderBy] = useQueryState("order");
+
 	const [type, setTypeDirectly] = useQueryState(
 		"type",
 		parseAsStringLiteral(searchRecordTypes).withDefault(searchRecordTypes[0]),
@@ -56,8 +60,10 @@ export function SearchInterface(_props: Readonly<SearchInterfaceProps>) {
 				<div className="grow bg-white p-6">
 					<QueryClientProvider client={queryClient}>
 						<ResultList
+							orderBy={orderBy}
 							page={page}
 							query={searchTerm}
+							setOrderBy={setOrderBy}
 							setPage={setPage}
 							setType={setType}
 							type={type}

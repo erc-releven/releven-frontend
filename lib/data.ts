@@ -60,10 +60,11 @@ export async function getSearchResults(
 	type: SearchRecordType = "people",
 	page = 1,
 	query = "",
+	orderBy: string | null = null,
 ): Promise<SearchRecordResult> {
 	const data = (
 		await client.GET(typesToEndpoints[type].path, {
-			params: { query: { page: page, query: query } },
+			params: { query: { page: page, query: query, order_by: orderBy as any } },
 		})
 	).data as any;
 	return {
