@@ -351,21 +351,21 @@ export interface components {
 			id?: string | null;
 			written_text_creation_author_is?: components["schemas"]["AuthorAssertion_Person"] | null;
 			/** Written Text Creation Author Are */
-			written_text_creation_author_are?: string | null;
+			written_text_creation_author_are: string | null;
 			written_text_creation_author_by?: components["schemas"]["AuthorAssertion_Person"] | null;
 			/** Written Text Creation Author By Group */
-			written_text_creation_author_by_group?: string | null;
+			written_text_creation_author_by_group: string | null;
 			written_text_creation_author_src?: components["schemas"]["AuthorAssertion_Passage"] | null;
 			/** Written Text Creation Author Based */
-			written_text_creation_author_based?: string | null;
+			written_text_creation_author_based: string | null;
 		};
 		AuthorAssertion_Passage: {
 			/** Id */
 			id?: string | null;
 			/** Passage Reference String */
-			passage_reference_string?: string | null;
+			passage_reference_string: string | null;
 			/** Passage Content */
-			passage_content?: string | null;
+			passage_content: string | null;
 			/** Passage In Publication Assertion */
 			passage_in_publication_assertion: Array<string>;
 			/** Passage On Object Assertion */
@@ -379,13 +379,13 @@ export interface components {
 			/** Id */
 			id?: string | null;
 			/** Person Display Name */
-			person_display_name?: string | null;
+			person_display_name: string | null;
 			/** Person Id Assignment */
 			person_id_assignment: Array<string>;
 			/** Person Name Of Person Assertion */
 			person_name_of_person_assertion: Array<string>;
 			/** Person Birth Of Person */
-			person_birth_of_person?: string | null;
+			person_birth_of_person: string | null;
 			/** Person Gender Assignment */
 			person_gender_assignment: Array<string>;
 			/** Person Ethnic Group Membership Assertion */
@@ -407,7 +407,7 @@ export interface components {
 			/** Person Possession Assertion */
 			person_possession_assertion: Array<string>;
 			/** Person Death Of Person */
-			person_death_of_person?: string | null;
+			person_death_of_person: string | null;
 		};
 		Author_group: {
 			/**
@@ -416,7 +416,7 @@ export interface components {
 			 */
 			id: string;
 			/** Author Group Display Name */
-			author_group_display_name?: string | null;
+			author_group_display_name: string | null;
 			/** Author Group Coauthor */
 			author_group_coauthor: Array<string>;
 		};
@@ -436,7 +436,7 @@ export interface components {
 			 */
 			id: string;
 			/** Boulloterion Display Name */
-			boulloterion_display_name?: string | null;
+			boulloterion_display_name: string | null;
 			/** Boulloterion Id Assignment */
 			boulloterion_id_assignment: Array<string>;
 			/** Boulloterion Produced Seal Assertion */
@@ -444,7 +444,7 @@ export interface components {
 			/** Boulloterion Design Element Assertion */
 			boulloterion_design_element_assertion: Array<string>;
 			/** Boulloterion Ownership */
-			boulloterion_ownership?: string | null;
+			boulloterion_ownership: string | null;
 		};
 		Ethnic_group: {
 			/**
@@ -453,13 +453,13 @@ export interface components {
 			 */
 			id: string;
 			/** Ethnic Group Display Name */
-			ethnic_group_display_name?: string | null;
+			ethnic_group_display_name: string | null;
 		};
 		ExternalIdentifier: {
 			/** Id */
 			id?: string | null;
 			/** Person Id Assignment Identifier Plain */
-			person_id_assignment_identifier_plain?: string | null;
+			person_id_assignment_identifier_plain: string | null;
 		};
 		External_authority: {
 			/**
@@ -468,7 +468,7 @@ export interface components {
 			 */
 			id: string;
 			/** External Authority Display Name */
-			external_authority_display_name?: string | null;
+			external_authority_display_name: string | null;
 			/** External Authority Has Member Assertion */
 			external_authority_has_member_assertion: Array<string>;
 		};
@@ -479,19 +479,35 @@ export interface components {
 			 */
 			id: string;
 			/** Gender Display Name */
-			gender_display_name?: string | null;
+			gender_display_name: string | null;
+		};
+		GenderAssertion: {
+			/** Id */
+			id?: string | null;
+			person_gender_assignment_gender_is?: components["schemas"]["GenderAssertion_Gender"] | null;
+		};
+		GenderAssertion_Gender: {
+			/** Id */
+			id?: string | null;
+			/** Gender Display Name */
+			gender_display_name: string | null;
+		};
+		GenderAssignment: {
+			/** Id */
+			id?: string | null;
+			/** Person Gender Assignment Gender Assertion */
+			person_gender_assignment_gender_assertion: Array<components["schemas"]["GenderAssertion"]>;
 		};
 		/** HTTPValidationError */
 		HTTPValidationError: {
 			/** Detail */
 			detail?: Array<components["schemas"]["ValidationError"]>;
 		};
-		IdentityInOtherServices: {
+		IdentityInOtherServices_ExternalAuthority: {
 			/** Id */
 			id?: string | null;
-			person_id_assignment_identifier?: components["schemas"]["ExternalIdentifier"] | null;
-			/** Person Id Assignment By */
-			person_id_assignment_by?: string | null;
+			/** External Authority Display Name */
+			external_authority_display_name: string | null;
 		};
 		Language: {
 			/**
@@ -500,7 +516,7 @@ export interface components {
 			 */
 			id: string;
 			/** Language Display Name */
-			language_display_name?: string | null;
+			language_display_name: string | null;
 		};
 		Legal_status: {
 			/**
@@ -509,19 +525,58 @@ export interface components {
 			 */
 			id: string;
 			/** Legal Status Display Name */
-			legal_status_display_name?: string | null;
+			legal_status_display_name: string | null;
 		};
-		NameOfPersonAssertion: {
+		NameOfPersonAssertion_Passage: {
 			/** Id */
 			id?: string | null;
-			/** Person Name Of Person Is */
-			person_name_of_person_is?: string | null;
+			/** Passage Reference String */
+			passage_reference_string: string | null;
+			/** Passage Content */
+			passage_content: string | null;
+			/** Passage In Publication Assertion */
+			passage_in_publication_assertion: Array<string>;
+			/** Passage On Object Assertion */
+			passage_on_object_assertion: Array<string>;
+			/** Passage On Boulloterion Assertion */
+			passage_on_boulloterion_assertion: Array<string>;
+			/** Passage Text Language Assertion */
+			passage_text_language_assertion: Array<string>;
 		};
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		OrderByEnum: "id";
+		NameOfPersonAssertion_Person: {
+			/** Id */
+			id?: string | null;
+			/** Person Display Name */
+			person_display_name: string | null;
+			/** Person Id Assignment */
+			person_id_assignment: Array<string>;
+			/** Person Name Of Person Assertion */
+			person_name_of_person_assertion: Array<string>;
+			/** Person Birth Of Person */
+			person_birth_of_person: string | null;
+			/** Person Gender Assignment */
+			person_gender_assignment: Array<string>;
+			/** Person Ethnic Group Membership Assertion */
+			person_ethnic_group_membership_assertion: Array<string>;
+			/** Person Population Membership Assertion */
+			person_population_membership_assertion: Array<string>;
+			/** Person Part Of Manifest Group Assertion */
+			person_part_of_manifest_group_assertion: Array<string>;
+			/** Person Social Relationship */
+			person_social_relationship: Array<string>;
+			/** Person Language Skill */
+			person_language_skill: Array<string>;
+			/** Person Social Role */
+			person_social_role: Array<string>;
+			/** Person Legal Role */
+			person_legal_role: Array<string>;
+			/** Person Religious Affiliation */
+			person_religious_affiliation: Array<string>;
+			/** Person Possession Assertion */
+			person_possession_assertion: Array<string>;
+			/** Person Death Of Person */
+			person_death_of_person: string | null;
+		};
 		/** Page[Author_group] */
 		Page_Author_group_: {
 			/** Items */
@@ -750,9 +805,9 @@ export interface components {
 			 */
 			id: string;
 			/** Passage Reference String */
-			passage_reference_string?: string | null;
+			passage_reference_string: string | null;
 			/** Passage Content */
-			passage_content?: string | null;
+			passage_content: string | null;
 			/** Passage In Publication Assertion */
 			passage_in_publication_assertion: Array<string>;
 			/** Passage On Object Assertion */
@@ -769,11 +824,13 @@ export interface components {
 			 */
 			id: string;
 			/** Person Display Name */
-			person_display_name?: string | null;
+			person_display_name: string | null;
 			/** Person Id Assignment */
-			person_id_assignment: Array<components["schemas"]["IdentityInOtherServices"]>;
+			person_id_assignment: Array<components["schemas"]["releven_people__IdentityInOtherServices"]>;
 			/** Person Name Of Person Assertion */
-			person_name_of_person_assertion: Array<components["schemas"]["NameOfPersonAssertion"]>;
+			person_name_of_person_assertion: Array<
+				components["schemas"]["releven_people__NameOfPersonAssertion"]
+			>;
 		};
 		PeopleDetail: {
 			/**
@@ -782,15 +839,19 @@ export interface components {
 			 */
 			id: string;
 			/** Person Display Name */
-			person_display_name?: string | null;
+			person_display_name: string | null;
 			/** Person Id Assignment */
-			person_id_assignment: Array<components["schemas"]["IdentityInOtherServices"]>;
+			person_id_assignment: Array<
+				components["schemas"]["releven_people_detail__IdentityInOtherServices"]
+			>;
 			/** Person Name Of Person Assertion */
-			person_name_of_person_assertion: Array<components["schemas"]["NameOfPersonAssertion"]>;
+			person_name_of_person_assertion: Array<
+				components["schemas"]["releven_people_detail__NameOfPersonAssertion"]
+			>;
 			/** Person Birth Of Person */
-			person_birth_of_person?: string | null;
+			person_birth_of_person: string | null;
 			/** Person Gender Assignment */
-			person_gender_assignment: Array<string>;
+			person_gender_assignment: Array<components["schemas"]["GenderAssignment"]>;
 			/** Person Ethnic Group Membership Assertion */
 			person_ethnic_group_membership_assertion: Array<string>;
 			/** Person Population Membership Assertion */
@@ -810,7 +871,7 @@ export interface components {
 			/** Person Possession Assertion */
 			person_possession_assertion: Array<string>;
 			/** Person Death Of Person */
-			person_death_of_person?: string | null;
+			person_death_of_person: string | null;
 		};
 		Place: {
 			/**
@@ -819,7 +880,7 @@ export interface components {
 			 */
 			id: string;
 			/** Place Display Name */
-			place_display_name?: string | null;
+			place_display_name: string | null;
 			/** Place Id Assignment */
 			place_id_assignment: Array<string>;
 			/** Place Name Of Place Assertion */
@@ -829,7 +890,7 @@ export interface components {
 			/** Place Type Of Place Assertion */
 			place_type_of_place_assertion: Array<string>;
 			/** Place Spatiotemporal Existence */
-			place_spatiotemporal_existence?: string | null;
+			place_spatiotemporal_existence: string | null;
 			/** Place Succeeded By Assertion */
 			place_succeeded_by_assertion: Array<string>;
 			/** Place Had Population Assertion */
@@ -842,9 +903,9 @@ export interface components {
 			 */
 			id: string;
 			/** Publication Display Name */
-			publication_display_name?: string | null;
+			publication_display_name: string | null;
 			/** Publication Creation */
-			publication_creation?: string | null;
+			publication_creation: string | null;
 			/** Publication Derived From Assertion */
 			publication_derived_from_assertion: Array<string>;
 		};
@@ -855,7 +916,7 @@ export interface components {
 			 */
 			id: string;
 			/** Religious Affiliation Display Name */
-			religious_affiliation_display_name?: string | null;
+			religious_affiliation_display_name: string | null;
 		};
 		Seal: {
 			/**
@@ -864,7 +925,7 @@ export interface components {
 			 */
 			id: string;
 			/** Seal Seal Id */
-			seal_seal_id?: string | null;
+			seal_seal_id: string | null;
 			/** Seal Locative Status */
 			seal_locative_status: Array<string>;
 		};
@@ -875,7 +936,7 @@ export interface components {
 			 */
 			id: string;
 			/** Seal Collection Display Name */
-			seal_collection_display_name?: string | null;
+			seal_collection_display_name: string | null;
 			/** Seal Collection Seal In Collection Assertion */
 			seal_collection_seal_in_collection_assertion: Array<string>;
 			/** Seal Collection Ownership Change */
@@ -888,7 +949,7 @@ export interface components {
 			 */
 			id: string;
 			/** Social Relationship Display Name */
-			social_relationship_display_name?: string | null;
+			social_relationship_display_name: string | null;
 			/** Social Relationship Categorisation Assertion */
 			social_relationship_categorisation_assertion: Array<string>;
 		};
@@ -899,7 +960,7 @@ export interface components {
 			 */
 			id: string;
 			/** Written Text Display Name */
-			written_text_display_name?: string | null;
+			written_text_display_name: string | null;
 			/** Written Text Title Assertion */
 			written_text_title_assertion: Array<string>;
 			written_text_creation?: components["schemas"]["releven_text__Creation"] | null;
@@ -917,7 +978,7 @@ export interface components {
 			 */
 			id: string;
 			/** Written Text Display Name */
-			written_text_display_name?: string | null;
+			written_text_display_name: string | null;
 			/** Written Text Title Assertion */
 			written_text_title_assertion: Array<string>;
 			written_text_creation?: components["schemas"]["releven_text_detail__Creation"] | null;
@@ -936,6 +997,133 @@ export interface components {
 			msg: string;
 			/** Error Type */
 			type: string;
+		};
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__1: "id" | "author_group_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__10: "id" | "person_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__11:
+			| "id"
+			| "place_display_name"
+			| "place_spatiotemporal_existence";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__12:
+			| "id"
+			| "publication_display_name"
+			| "publication_creation";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__13: "id" | "religious_affiliation_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__14: "id" | "seal_seal_id";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__15: "id" | "seal_collection_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__16: "id" | "social_relationship_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__17: "id" | "written_text_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__2: "id";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__3:
+			| "id"
+			| "boulloterion_display_name"
+			| "boulloterion_ownership";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__4: "id" | "ethnic_group_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__5: "id" | "external_authority_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__6: "id" | "gender_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__7: "id" | "language_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__8: "id" | "legal_status_display_name";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__9: "id" | "passage_reference_string" | "passage_content";
+		releven_people__IdentityInOtherServices: {
+			/** Id */
+			id?: string | null;
+			person_id_assignment_identifier?: components["schemas"]["ExternalIdentifier"] | null;
+			person_id_assignment_by?:
+				| components["schemas"]["IdentityInOtherServices_ExternalAuthority"]
+				| null;
+		};
+		releven_people__NameOfPersonAssertion: {
+			/** Id */
+			id?: string | null;
+			/** Person Name Of Person Is */
+			person_name_of_person_is: string | null;
+		};
+		releven_people_detail__IdentityInOtherServices: {
+			/** Id */
+			id?: string | null;
+			person_id_assignment_identifier?: components["schemas"]["ExternalIdentifier"] | null;
+			/** Person Id Assignment By */
+			person_id_assignment_by: string | null;
+		};
+		releven_people_detail__NameOfPersonAssertion: {
+			/** Id */
+			id?: string | null;
+			/** Person Name Of Person Is */
+			person_name_of_person_is: string | null;
+			person_name_of_person_by?: components["schemas"]["NameOfPersonAssertion_Person"] | null;
+			/** Person Name Of Person By Group */
+			person_name_of_person_by_group: string | null;
+			person_name_of_person_src?: components["schemas"]["NameOfPersonAssertion_Passage"] | null;
+			/** Person Name Of Person Based */
+			person_name_of_person_based: string | null;
 		};
 		releven_text__Creation: {
 			/** Id */
@@ -979,7 +1167,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__1"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1009,7 +1197,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__2"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1039,7 +1227,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__3"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1069,7 +1257,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__4"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1099,7 +1287,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__5"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1129,7 +1317,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__6"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1159,7 +1347,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__7"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1189,7 +1377,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__8"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1219,7 +1407,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__9"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1249,8 +1437,9 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__10"] | null;
 				desc?: boolean | null;
+				query?: string | null;
 			};
 			header?: never;
 			path?: never;
@@ -1306,7 +1495,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__11"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1336,7 +1525,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__12"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1366,7 +1555,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__13"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1396,7 +1585,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__14"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1426,7 +1615,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__15"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1456,7 +1645,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__16"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1486,8 +1675,9 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["OrderByEnum"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__17"] | null;
 				desc?: boolean | null;
+				query?: string | null;
 			};
 			header?: never;
 			path?: never;
