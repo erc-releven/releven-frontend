@@ -66,17 +66,17 @@
 					"people": {
 						"title": "People",
 						"subtitle": "Lorem ipsum",
-						"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+						"description": "Who lived during the eleventh century? Where did they travel? How did they interact with the world around them? Search for empresses, monks, traders, judges, and more and get to know how their actions and perspectives set the eleventh-century in motion."
 					},
 					"places": {
 						"title": "Places",
 						"subtitle": "Lorem ipsum",
-						"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+						"description": "How were various senses of place and space conceived of and articulated in the eleventh century? What was the function of these places? To whom did they belong? What happened to them? Search for monasteries, cities, villages, and empires and discover how these diverse spaces served to connect and delimit the eleventh-century Christian world."
 					},
 					"texts": {
 						"title": "Texts",
 						"subtitle": "Lorem ipsum",
-						"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+						"description": "What texts were produced during the eleventh century? Where? By whom? For what purpose? Find out more about the letters, chronicles, and documents that were composed and copied during the eleventh century and how they acted as the material carriers of ideas that served to connect different people and places."
 					}
 				}
 			},
@@ -102,7 +102,7 @@
 		"title": "Imprint"
 	},
 	"IndexPage": {
-		"lead-in": "Discover the eleventh century by searching for historical persons, places, texts, and more. Use the free search function or navigate through our three thematic strands below.",
+		"lead-in": "Discover the eleventh century by searching for historical persons, places, texts, and more! Use the free search function or navigate through our three thematic strands below.",
 		"search_placeholder": "Search",
 		"title": "Search the 11th century!",
 		"try_it_out": "try it out",
