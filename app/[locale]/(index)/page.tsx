@@ -105,7 +105,7 @@ function ResearchPlatformSection(): ReactNode {
 		<section className="flex flex-col items-center py-20">
 			<h2 className="text-lg font-extrabold text-primary uppercase">{t("title")}</h2>
 			<span className="mb-20 text-3xl">{t("lead-in")}</span>
-			<div className="flex flex-col items-center gap-4 lg:flex-row">
+			<div className="flex flex-col items-stretch gap-4 lg:flex-row">
 				{Object.entries(cards).map(([id, card]) => {
 					return (
 						<ImageCard
@@ -151,7 +151,7 @@ function ViewpointSection() {
 		<section className="flex flex-col items-center py-16">
 			<h2 className="text-lg font-extrabold text-primary uppercase">{_t("title")}</h2>
 			<span className="block text-center text-3xl">{_t("lead-in")}</span>
-			<div className="flex flex-col gap-8 py-16 lg:flex-row">
+			<div className="flex flex-col items-stretch gap-8 py-16 lg:flex-row">
 				{Object.entries(cards).map(([id, card]) => {
 					return (
 						<IconCard
