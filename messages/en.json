@@ -43,9 +43,7 @@
 		"navigation-social-media": {
 			"items": {
 				"bluesky": "Bluesky",
-				"mastodon": "Mastodon",
-				"twitter": "Twitter",
-				"youtube": "YouTube"
+				"mastodon": "Mastodon"
 			},
 			"label": "Social media"
 		}
@@ -66,7 +64,7 @@
 					"people": {
 						"title": "People",
 						"subtitle": "Lorem ipsum",
-						"description": "Who lived during the eleventh century? Where did they travel? How did they interact with the world around them? Search for empresses, monks, traders, judges, and more and get to know how their actions and perspectives set the eleventh-century in motion."
+						"description": "Who lived in the Christian world of the eleventh century? Where did they travel? How did they interact with the world around them? Search for empresses, monks, traders, judges, and more and get to know how their actions and perspectives connected them with each other."
 					},
 					"places": {
 						"title": "Places",
@@ -76,7 +74,7 @@
 					"texts": {
 						"title": "Texts",
 						"subtitle": "Lorem ipsum",
-						"description": "What texts were produced during the eleventh century? Where? By whom? For what purpose? Find out more about the letters, chronicles, and documents that were composed and copied during the eleventh century and how they acted as the material carriers of ideas that served to connect different people and places."
+						"description": "What texts were produced in the eleventh-century Christian world? Where? By whom? For what purpose? Find out more about the letters, chronicles, and documents that were composed and copied during the eleventh century and how they acted as the material carriers of ideas that served to connect different people and places."
 					}
 				}
 			},
@@ -102,33 +100,33 @@
 		"title": "Imprint"
 	},
 	"IndexPage": {
-		"lead-in": "Discover the eleventh century by searching for historical persons, places, texts, and more! Use the free search function or navigate through our three thematic strands below.",
+		"lead-in": "Discover historical knowledge from the eleventh century by searching for historical persons, places, texts, and more! Use the free-text search function or navigate through our three thematic strands below.",
 		"search_placeholder": "Search",
-		"title": "Search the 11th century!",
+		"title": "Discover the eleventh century Christian world!",
 		"try_it_out": "try it out",
 		"researchplatform": {
 			"title": "research platform",
-			"lead-in": "Discover Resources from the 11th century"
+			"lead-in": "Discover the eleventh century Christian world"
 		},
 		"about": {
 			"title": "About Us",
-			"lead-in": "Discover more about Releven",
-			"description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim."
+			"lead-in": "Read about the RELEVEN project and its results",
+			"description": "Five years, fourteen project members, numerous collaborators and contributors, and mountains of data collection and analysis – what has the RELEVEN project discovered, invented, and accomplished?"
 		},
 		"services": {
 			"title": "Services",
-			"lead-in": "Find and compare viewpoints",
+			"lead-in": "Analyse and compare knowledge",
 			"relationships": {
 				"title": "Discover new relationships",
-				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+				"description": "Visualize the connections that scholars past and present have made between people, places, and texts."
 			},
 			"related": {
-				"title": "Find related entities",
-				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+				"title": "Map the world",
+				"description": "Examine our understanding of the geography of the eleventh century, as the inhabitants might have understood it."
 			},
 			"viewpoints": {
 				"title": "Compare viewpoints",
-				"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+				"description": "What do we think we know? See the differing and often conflicting ideas about what happened in the eleventh century."
 			}
 		}
 	},
