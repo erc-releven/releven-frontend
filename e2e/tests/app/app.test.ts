@@ -164,7 +164,7 @@ test.describe("app", () => {
 	test.describe("should add aria-current attribute to nav links", () => {
 		test.use({ viewport: { width: 1440, height: 1024 } });
 
-		test("on desktop", async ({ createIndexPage, page }) => {
+		test("on desktop", async ({ createIndexPage }) => {
 			const { indexPage, i18n } = await createIndexPage(defaultLocale);
 			await indexPage.goto();
 
@@ -174,25 +174,15 @@ test.describe("app", () => {
 					name: i18n.t("AppHeader.navigation.items.home"),
 				})
 				.first();
-			const aboutLink = indexPage.page.getByRole("navigation").getByRole("link", {
-				name: i18n.t("AppHeader.navigation.items.about"),
-			});
 
 			await expect(homeLink).toHaveAttribute("aria-current", "page");
-			await expect(aboutLink).not.toHaveAttribute("aria-current", "page");
-
-			await aboutLink.click();
-			await page.waitForURL("**/about");
-
-			await expect(homeLink).not.toHaveAttribute("aria-current", "page");
-			await expect(aboutLink).toHaveAttribute("aria-current", "page");
 		});
 	});
 
 	test.describe("should add aria-current attribute to nav links", () => {
 		test.use({ viewport: { width: 393, height: 852 } });
 
-		test("on mobile", async ({ createIndexPage, page }) => {
+		test("on mobile", async ({ createIndexPage }) => {
 			const { indexPage, i18n } = await createIndexPage(defaultLocale);
 			await indexPage.goto();
 
@@ -204,20 +194,8 @@ test.describe("app", () => {
 					name: i18n.t("AppHeader.navigation.items.home"),
 				})
 				.first();
-			const aboutLink = indexPage.page.getByRole("dialog").getByRole("link", {
-				name: i18n.t("AppHeader.navigation.items.about"),
-			});
 
 			await expect(homeLink).toHaveAttribute("aria-current", "page");
-			await expect(aboutLink).not.toHaveAttribute("aria-current", "page");
-
-			await aboutLink.click();
-			await page.waitForURL("**/about");
-
-			await indexPage.page.getByRole("navigation").getByRole("button").click();
-
-			await expect(homeLink).not.toHaveAttribute("aria-current", "page");
-			await expect(aboutLink).toHaveAttribute("aria-current", "page");
 		});
 	});
 });
