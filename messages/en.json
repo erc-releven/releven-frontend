@@ -169,6 +169,7 @@
 			},
 			"sort-by": {
 				"default": "sort",
+				"relevance": "Relevance",
 				"people": {
 					"person_display_name": "Name"
 				},

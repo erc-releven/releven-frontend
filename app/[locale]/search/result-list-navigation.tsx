@@ -29,7 +29,7 @@ export function ResultListNavigation(props: Readonly<ResultListNavigationProps>)
 			id: "person_display_name",
 			name: t("sort-by.people.person_display_name"),
 		},
-		// { id: "assertion_count", name: "relevance" },
+		{ id: "n_assertions", name: t("sort-by.relevance") },
 	];
 
 	return data ? (

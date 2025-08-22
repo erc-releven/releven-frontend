@@ -55,7 +55,6 @@ export function SearchInterface(_props: Readonly<SearchInterfaceProps>) {
 							options={searchRecordTypes as unknown as Array<string>}
 						/>
 					</Filter>
-					<Filter label={"Years active"} />
 				</div>
 				<div className="grow bg-white p-6">
 					<QueryClientProvider client={queryClient}>

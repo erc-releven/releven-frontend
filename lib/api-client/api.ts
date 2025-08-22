@@ -347,8 +347,6 @@ export type webhooks = Record<string, never>;
 export interface components {
 	schemas: {
 		AuthorAssertion: {
-			/** Id */
-			id?: string | null;
 			written_text_creation_author_is?: components["schemas"]["AuthorAssertion_Person"] | null;
 			/** Written Text Creation Author Are */
 			written_text_creation_author_are: string | null;
@@ -360,8 +358,6 @@ export interface components {
 			written_text_creation_author_based: string | null;
 		};
 		AuthorAssertion_Passage: {
-			/** Id */
-			id?: string | null;
 			/** Passage Reference String */
 			passage_reference_string: string | null;
 			/** Passage Content */
@@ -376,8 +372,6 @@ export interface components {
 			passage_text_language_assertion: Array<string>;
 		};
 		AuthorAssertion_Person: {
-			/** Id */
-			id?: string | null;
 			/** Person Display Name */
 			person_display_name: string | null;
 			/** Person Id Assignment */
@@ -456,8 +450,6 @@ export interface components {
 			ethnic_group_display_name: string | null;
 		};
 		ExternalIdentifier: {
-			/** Id */
-			id?: string | null;
 			/** Person Id Assignment Identifier Plain */
 			person_id_assignment_identifier_plain: string | null;
 		};
@@ -482,19 +474,13 @@ export interface components {
 			gender_display_name: string | null;
 		};
 		GenderAssertion: {
-			/** Id */
-			id?: string | null;
 			person_gender_assignment_gender_is?: components["schemas"]["GenderAssertion_Gender"] | null;
 		};
 		GenderAssertion_Gender: {
-			/** Id */
-			id?: string | null;
 			/** Gender Display Name */
 			gender_display_name: string | null;
 		};
 		GenderAssignment: {
-			/** Id */
-			id?: string | null;
 			/** Person Gender Assignment Gender Assertion */
 			person_gender_assignment_gender_assertion: Array<components["schemas"]["GenderAssertion"]>;
 		};
@@ -504,8 +490,6 @@ export interface components {
 			detail?: Array<components["schemas"]["ValidationError"]>;
 		};
 		IdentityInOtherServices_ExternalAuthority: {
-			/** Id */
-			id?: string | null;
 			/** External Authority Display Name */
 			external_authority_display_name: string | null;
 		};
@@ -528,8 +512,6 @@ export interface components {
 			legal_status_display_name: string | null;
 		};
 		NameOfPersonAssertion_Passage: {
-			/** Id */
-			id?: string | null;
 			/** Passage Reference String */
 			passage_reference_string: string | null;
 			/** Passage Content */
@@ -544,8 +526,6 @@ export interface components {
 			passage_text_language_assertion: Array<string>;
 		};
 		NameOfPersonAssertion_Person: {
-			/** Id */
-			id?: string | null;
 			/** Person Display Name */
 			person_display_name: string | null;
 			/** Person Id Assignment */
@@ -831,6 +811,8 @@ export interface components {
 			person_name_of_person_assertion: Array<
 				components["schemas"]["releven_people__NameOfPersonAssertion"]
 			>;
+			/** N Assertions */
+			n_assertions: number;
 		};
 		PeopleDetail: {
 			/**
@@ -1007,7 +989,7 @@ export interface components {
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__10: "id" | "person_display_name";
+		rdfproxy__utils__models__OrderByEnum__10: "id" | "person_display_name" | "n_assertions";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
@@ -1093,29 +1075,21 @@ export interface components {
 		 */
 		rdfproxy__utils__models__OrderByEnum__9: "id" | "passage_reference_string" | "passage_content";
 		releven_people__IdentityInOtherServices: {
-			/** Id */
-			id?: string | null;
 			person_id_assignment_identifier?: components["schemas"]["ExternalIdentifier"] | null;
 			person_id_assignment_by?:
 				| components["schemas"]["IdentityInOtherServices_ExternalAuthority"]
 				| null;
 		};
 		releven_people__NameOfPersonAssertion: {
-			/** Id */
-			id?: string | null;
 			/** Person Name Of Person Is */
 			person_name_of_person_is: string | null;
 		};
 		releven_people_detail__IdentityInOtherServices: {
-			/** Id */
-			id?: string | null;
 			person_id_assignment_identifier?: components["schemas"]["ExternalIdentifier"] | null;
 			/** Person Id Assignment By */
 			person_id_assignment_by: string | null;
 		};
 		releven_people_detail__NameOfPersonAssertion: {
-			/** Id */
-			id?: string | null;
 			/** Person Name Of Person Is */
 			person_name_of_person_is: string | null;
 			person_name_of_person_by?: components["schemas"]["NameOfPersonAssertion_Person"] | null;
@@ -1126,8 +1100,6 @@ export interface components {
 			person_name_of_person_based: string | null;
 		};
 		releven_text__Creation: {
-			/** Id */
-			id?: string | null;
 			/** Written Text Creation Time Frame Assertion */
 			written_text_creation_time_frame_assertion: Array<string>;
 			/** Written Text Creation Author Assertion */
@@ -1140,8 +1112,6 @@ export interface components {
 			written_text_creation_translated_from_assertion: Array<string>;
 		};
 		releven_text_detail__Creation: {
-			/** Id */
-			id?: string | null;
 			/** Written Text Creation Time Frame Assertion */
 			written_text_creation_time_frame_assertion: Array<string>;
 			/** Written Text Creation Author Assertion */

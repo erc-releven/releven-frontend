@@ -21,11 +21,18 @@ function wrapPerson(item: components["schemas"]["People"]): SearchRecord {
 		.filter((v) => {
 			return v;
 		});
+	let description =
+		item.n_assertions === 1
+			? "1 associated assertion."
+			: `${item.n_assertions === 0 ? "no" : item.n_assertions.toString()} associated assertions.`;
+	if (names.length) {
+		description += ` known as ${names.join(", ")}.`;
+	}
 	return {
 		type: "people",
 		id: item.id,
 		name: item.person_display_name!,
-		description: names.length ? `known as ${names.join(", ")}` : "",
+		description: description,
 	};
 }
 
@@ -64,7 +71,14 @@ export async function getSearchResults(
 ): Promise<SearchRecordResult> {
 	const data = (
 		await client.GET(typesToEndpoints[type].path, {
-			params: { query: { page: page, query: query, order_by: orderBy as any } },
+			params: {
+				query: {
+					page: page,
+					query: query,
+					order_by: orderBy as any,
+					desc: orderBy === "n_assertions" ? true : undefined,
+				},
+			},
 		})
 	).data as any;
 	return {
