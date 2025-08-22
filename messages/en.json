@@ -56,7 +56,13 @@
 				"open": "Open navigation menu"
 			},
 			"items": {
-				"about": "About the project",
+				"about": {
+					"title": "About the project",
+					"case-studies": "Case studies",
+					"summary": "Project summary",
+					"technical": "Technical developments",
+					"team": "Team"
+				},
 				"home": "Home",
 				"publications": "Publications",
 				"resources": {

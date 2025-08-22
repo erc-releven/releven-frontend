@@ -38,9 +38,30 @@ export function AppHeader(): ReactNode {
 			},
 		},
 		about: {
-			type: "link",
-			href: createHref({ pathname: "/about" }),
-			label: t("navigation.items.about"),
+			type: "menu",
+			label: t("navigation.items.about.title"),
+			children: {
+				about: {
+					type: "link",
+					href: createHref({ pathname: "/about" }),
+					label: t("navigation.items.about.summary"),
+				},
+				team: {
+					type: "link",
+					href: createHref({ pathname: "/about/team" }),
+					label: t("navigation.items.about.team"),
+				},
+				casestudies: {
+					type: "link",
+					href: createHref({ pathname: "/about/case-studies" }),
+					label: t("navigation.items.about.case-studies"),
+				},
+				technical: {
+					type: "link",
+					href: createHref({ pathname: "/about/technical" }),
+					label: t("navigation.items.about.technical"),
+				},
+			},
 		},
 		publications: {
 			type: "link",
