@@ -25,11 +25,11 @@ export function ResultListNavigation(props: Readonly<ResultListNavigationProps>)
 		// 	id: "",
 		// 	name: "",
 		// },
+		{ id: "n_assertions", name: t("sort-by.relevance") },
 		{
 			id: "person_display_name",
 			name: t("sort-by.people.person_display_name"),
 		},
-		{ id: "n_assertions", name: t("sort-by.relevance") },
 	];
 
 	return data ? (
@@ -60,6 +60,8 @@ export function ResultListNavigation(props: Readonly<ResultListNavigationProps>)
 				onSelectionChange={(key) => {
 					searchProps.setOrderBy(key as string);
 				}}
+				placeholder={t("sort-by.placeholder")}
+				selectedKey={searchProps.orderBy}
 			>
 				<SelectTrigger>
 					<SelectValue />
