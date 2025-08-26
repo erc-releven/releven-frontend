@@ -25,7 +25,9 @@ export function IconCard(props: Readonly<IconCardProps>): ReactNode {
 				<span className="block text-lg font-bold text-nowrap text-primary">{props.title}</span>
 				<div className="py-6">{props.description}</div>
 				<div className="relative">
-					<Button className="absolute right-6 uppercase">{t("try_it_out")}</Button>
+					<Button className="absolute right-6 uppercase" isDisabled={true}>
+						{t("coming_soon")}
+					</Button>
 				</div>
 			</div>
 		</div>

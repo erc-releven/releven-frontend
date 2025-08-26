@@ -106,6 +106,7 @@
 		"title": "Imprint"
 	},
 	"IndexPage": {
+		"coming_soon": "coming soon",
 		"lead-in": "Discover historical knowledge from the eleventh century by searching for historical persons, places, texts, and more! Use the free-text search function or navigate through our three thematic strands below.",
 		"search_placeholder": "Search",
 		"title": "Discover the eleventh century Christian world!",
