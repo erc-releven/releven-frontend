@@ -2,7 +2,9 @@ import { join } from "node:path";
 
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
+import slug from "rehype-slug";
 import toHtml from "rehype-stringify";
 import fromMarkdown from "remark-parse";
 import toHast from "remark-rehype";
@@ -10,10 +12,14 @@ import { read } from "to-vfile";
 import { unified } from "unified";
 
 import { MainContent } from "@/components/ui/main-content";
+import { remarkToc } from "@/lib/remark";
 
 const processor = unified()
 	.use(fromMarkdown)
+	.use(remarkToc)
 	.use(toHast)
+	.use(slug)
+	.use(rehypeAutolinkHeadings, { behavior: "wrap" })
 	.use(rehypeExternalLinks, { target: "_blank" })
 	.use(toHtml);
 
@@ -34,12 +40,11 @@ export default async function StaticPage(props: Readonly<StaticPageProps>): Prom
 	try {
 		// TODO add support for locales
 		const filePath = join(process.cwd(), "content", `${segments.join("/")}.md`);
+		const result = await processor.process(await read(filePath));
 
-		const vfile = await read(filePath);
-		const result = await processor.process(vfile);
 		return (
 			<MainContent className="mx-auto w-2xl">
-				<section dangerouslySetInnerHTML={{ __html: String(result) }} className="prose" />
+				<article dangerouslySetInnerHTML={{ __html: result.toString() }} className="prose" />
 			</MainContent>
 		);
 		/* eslint-disable @typescript-eslint/no-unused-vars */
