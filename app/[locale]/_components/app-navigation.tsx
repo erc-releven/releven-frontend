@@ -20,6 +20,7 @@ import {
 	useRouter,
 } from "@/lib/navigation/navigation";
 import { isCurrentPage } from "@/lib/navigation/use-nav-link";
+import relevenlogo from "@/public/assets/images/releven-logo.png";
 
 interface AppNavigationProps {
 	label: string;
@@ -37,7 +38,7 @@ export function AppNavigation(props: Readonly<AppNavigationProps>): ReactNode {
 				className="interactive -ml-2 grid shrink-0 place-content-center self-center rounded-2 p-2 outline-transparent focus-visible:focus-outline"
 				href={navigation.home.href}
 			>
-				<Logo className="h-8 w-auto text-text-strong" />
+				<Logo className="h-12 w-auto text-text-strong" image={relevenlogo} />
 				<span className="sr-only">{navigation.home.label}</span>
 			</NavLink>
 

@@ -8,6 +8,10 @@ import { TouchTarget } from "@/components/ui/touch-target";
 import { useMetadata } from "@/lib/i18n/metadata";
 import { createHref } from "@/lib/navigation/create-href";
 import type { NavigationLink } from "@/lib/navigation/navigation";
+import erclogo from "@/public/assets/images/erc-logo.png";
+import acdhlogo from "@/public/assets/images/logo-acdh-ch-light.svg";
+import relevenlogo from "@/public/assets/images/releven-logo.png";
+import univielogo from "@/public/assets/images/univie-logo.png";
 
 export function AppFooter(): ReactNode {
 	const t = useTranslations("AppFooter");
@@ -44,7 +48,10 @@ export function AppFooter(): ReactNode {
 	return (
 		<footer className="layout-grid grid gap-y-6 border-t border-stroke-weak py-12">
 			<div className="grid gap-y-8 xs:flex xs:items-center xs:justify-between">
-				<Logo className="h-8 w-auto shrink-0" />
+				<Logo className="h-14 w-auto shrink-0" image={relevenlogo} />
+				<Logo className="h-14 w-auto shrink-0" image={univielogo} />
+				<Logo className="h-14 w-auto shrink-0" image={acdhlogo} />
+				<Logo className="h-14 w-auto shrink-0" image={erclogo} />
 
 				<nav aria-label={t("navigation-social-media.label")}>
 					<ul className="flex flex-wrap items-center gap-x-6 gap-y-3" role="list">
