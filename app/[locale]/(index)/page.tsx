@@ -5,10 +5,9 @@ import type { ReactNode } from "react";
 
 import { Image } from "@/components/image";
 import { MainContent } from "@/components/ui/main-content";
+import { SubmitButton } from "@/components/ui/submit-button";
 import type { IntlLocale } from "@/lib/i18n/locales";
 import discoverIcon from "@/public/assets/images/candle.png";
-import clarin from "@/public/assets/images/clarin.png";
-import coretrust from "@/public/assets/images/core-trust-seal.png";
 import leaderImage from "@/public/assets/images/leader.png";
 import searchIcon from "@/public/assets/images/magnifier.png";
 import personImage from "@/public/assets/images/person.png";
@@ -74,15 +73,15 @@ function IntroSection(): ReactNode {
 					{t("title")}
 				</h1>
 				<div className="w-full max-w-screen-md sm:text-xl">{t("lead-in")}</div>
-				<input
-					className="rounded-full border border-solid border-gray-50 p-3"
-					placeholder={t("search_placeholder")}
-					type="search"
-				/>
-				<div className="flex flex-row gap-10 px-8">
-					<Image alt="" src={clarin} />
-					<Image alt="" src={coretrust} />
-				</div>
+				<form action="/en/search">
+					<input
+						className="rounded-full border border-solid border-gray-300 bg-white p-3"
+						name={"q"}
+						placeholder={t("search_placeholder")}
+						type="search"
+					/>
+					<SubmitButton className="sr-only" />
+				</form>
 			</div>
 			<div className="basis-2/3">
 				<Image alt="" className="object-cover" height={358} src={leaderImage} />
