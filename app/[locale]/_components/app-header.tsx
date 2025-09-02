@@ -65,7 +65,7 @@ export function AppHeader(): ReactNode {
 		},
 		publications: {
 			type: "link",
-			href: createHref({ pathname: "/publications" }),
+			href: "https://ucrisportal.univie.ac.at/en/projects/re-evaluating-the-eleventh-century-through-linked-events-and-enti/publications/",
 			label: t("navigation.items.publications"),
 		},
 	} satisfies Record<string, NavigationItem>;
