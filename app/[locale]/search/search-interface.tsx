@@ -35,9 +35,10 @@ export function SearchInterface(_props: Readonly<SearchInterfaceProps>) {
 	const setType = useCallback(
 		(value: SearchRecordType) => {
 			void setPage(null);
+			void setOrderBy(null);
 			void setTypeDirectly(value);
 		},
-		[setPage, setTypeDirectly],
+		[setOrderBy, setPage, setTypeDirectly],
 	);
 	return (
 		<>
