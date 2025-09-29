@@ -36,7 +36,7 @@ export function ResultList(props: Readonly<ResultListProps>) {
 				<ResultListNavigation data={data} searchProps={props} />
 				{isLoading || isPlaceholderData ? (
 					<LoadingDiv />
-				) : data ? (
+				) : data?.total ? (
 					<ul>
 						{data.items.map((it) => {
 							return (

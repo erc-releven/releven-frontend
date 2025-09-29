@@ -34,26 +34,28 @@ export function ResultListNavigation(props: Readonly<ResultListNavigationProps>)
 
 	return data ? (
 		<div className="mx-6 my-4 flex items-center justify-between">
-			<div>{t("n_results", { count: data.total })}</div>
-			<ReactPaginate
-				activeLinkClassName="bg-primary text-white"
-				breakClassName="flex items-center px-3 py-3 text-gray-300"
-				containerClassName="flex flex-row items-center"
-				disableInitialCallback={true}
-				// hrefBuilder={buildHref}
-				forcePage={searchProps.page - 1}
-				marginPagesDisplayed={2}
-				nextLabel={">"}
-				nextLinkClassName="flex items-center px-3 py-3 text-gray-300"
-				onPageChange={({ selected }) => {
-					searchProps.setPage(selected + 1);
-				}}
-				pageCount={data.pages}
-				pageLinkClassName="border-1 border-gray-100 flex items-center mx-1 min-w-10 px-2 py-2 rounded-1 text-gray-500 justify-center"
-				pageRangeDisplayed={2}
-				previousLabel={"<"}
-				previousLinkClassName="flex items-center px-3 py-2 text-gray-300"
-			/>
+			<div>{data.total > 0 && t("n_results", { count: data.total })}</div>
+			{data.pages > 1 && (
+				<ReactPaginate
+					activeLinkClassName="bg-primary text-white"
+					breakClassName="flex items-center px-3 py-3 text-gray-300"
+					containerClassName="flex flex-row items-center"
+					disableInitialCallback={true}
+					// hrefBuilder={buildHref}
+					forcePage={searchProps.page - 1}
+					marginPagesDisplayed={2}
+					nextLabel={">"}
+					nextLinkClassName="flex items-center px-3 py-3 text-gray-300"
+					onPageChange={({ selected }) => {
+						searchProps.setPage(selected + 1);
+					}}
+					pageCount={data.pages}
+					pageLinkClassName="border-1 border-gray-100 flex items-center mx-1 min-w-10 px-2 py-2 rounded-1 text-gray-500 justify-center"
+					pageRangeDisplayed={2}
+					previousLabel={"<"}
+					previousLinkClassName="flex items-center px-3 py-2 text-gray-300"
+				/>
+			)}
 			<Select
 				onSelectionChange={(key) => {
 					searchProps.setOrderBy(key as string);
