@@ -165,9 +165,7 @@
 			}
 		},
 		"result-list": {
-			"navigation": {
-				"results": "results"
-			},
+			"n_results": "{count, plural, =0 {no results} =1 {1 result} other {# results}}",
 			"sort-by": {
 				"default": "sort",
 				"placeholder": "sort by",

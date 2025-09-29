@@ -34,9 +34,7 @@ export function ResultListNavigation(props: Readonly<ResultListNavigationProps>)
 
 	return data ? (
 		<div className="mx-6 my-4 flex items-center justify-between">
-			<div>
-				{data.total} {"Result(s)"}
-			</div>
+			<div>{t("n_results", { count: data.total })}</div>
 			<ReactPaginate
 				activeLinkClassName="bg-primary text-white"
 				breakClassName="flex items-center px-3 py-3 text-gray-300"
