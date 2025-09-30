@@ -5,7 +5,8 @@ export type SearchRecordType = (typeof searchRecordTypes)[number];
 export interface SearchRecord {
 	id: string;
 	name: string;
-	description: string;
+	description?: string;
+	n_assertions?: number;
 	type: SearchRecordType;
 }
 

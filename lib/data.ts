@@ -21,18 +21,12 @@ function wrapPerson(item: components["schemas"]["People"]): SearchRecord {
 		.filter((v) => {
 			return v;
 		});
-	let description =
-		item.n_assertions === 1
-			? "1 associated assertion."
-			: `${item.n_assertions === 0 ? "no" : item.n_assertions.toString()} associated assertions.`;
-	if (names.length) {
-		description += ` known as ${names.join(", ")}.`;
-	}
 	return {
 		type: "people",
 		id: item.id,
 		name: item.person_display_name!,
-		description: description,
+		description: names.length ? ` known as ${names.join(", ")}.` : undefined,
+		n_assertions: item.n_assertions,
 	};
 }
 
@@ -40,8 +34,7 @@ function wrapPlace(item: components["schemas"]["Place"]): SearchRecord {
 	return {
 		type: "places",
 		id: item.id,
-		name: "no",
-		description: "no",
+		name: item.place_display_name!,
 	};
 }
 
@@ -50,7 +43,6 @@ function wrapText(item: components["schemas"]["Text"]): SearchRecord {
 		type: "texts",
 		id: item.id,
 		name: item.written_text_display_name!,
-		description: "",
 	};
 }
 

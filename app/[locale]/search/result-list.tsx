@@ -1,5 +1,6 @@
 "use client";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 
 import { Image } from "@/components/image";
 import { Link } from "@/components/link";
@@ -20,6 +21,7 @@ export interface ResultListProps {
 }
 
 export function ResultList(props: Readonly<ResultListProps>) {
+	const t = useTranslations("SearchPage.result-list");
 	const { orderBy, type, page, query } = props;
 	const { isLoading, isError, isPlaceholderData, data, error } = useQuery({
 		queryFn: () => {
@@ -56,6 +58,9 @@ export function ResultList(props: Readonly<ResultListProps>) {
 											{it.name}
 										</Link>
 										<p>{it.description}</p>
+										{it.n_assertions ? (
+											<p>{t("n_assertions", { count: it.n_assertions })}</p>
+										) : null}
 									</div>
 								</li>
 							);
