@@ -96,7 +96,7 @@ function ResearchPlatformSection(): ReactNode {
 
 	const cards = {
 		people: { icon: personImage, path: "/people" as const },
-		places: { icon: placeImage, path: "/place" as const },
+		places: { icon: placeImage, path: "/places" as const },
 		texts: { icon: textImage, path: "/text" as const },
 	};
 
