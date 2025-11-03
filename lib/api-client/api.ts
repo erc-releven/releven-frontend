@@ -186,15 +186,32 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
-	"/place": {
+	"/places": {
 		parameters: {
 			query?: never;
 			header?: never;
 			path?: never;
 			cookie?: never;
 		};
-		/** Releven Place */
-		get: operations["releven_place_place_get"];
+		/** Releven Places */
+		get: operations["releven_places_places_get"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/places/detail": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Releven Places Detail */
+		get: operations["releven_places_detail_places_detail_get"];
 		put?: never;
 		post?: never;
 		delete?: never;
@@ -489,10 +506,6 @@ export interface components {
 			/** Detail */
 			detail?: Array<components["schemas"]["ValidationError"]>;
 		};
-		IdentityInOtherServices_ExternalAuthority: {
-			/** External Authority Display Name */
-			external_authority_display_name: string | null;
-		};
 		Language: {
 			/**
 			 * Id
@@ -528,34 +541,6 @@ export interface components {
 		NameOfPersonAssertion_Person: {
 			/** Person Display Name */
 			person_display_name: string | null;
-			/** Person Id Assignment */
-			person_id_assignment: Array<string>;
-			/** Person Name Of Person Assertion */
-			person_name_of_person_assertion: Array<string>;
-			/** Person Birth Of Person */
-			person_birth_of_person: string | null;
-			/** Person Gender Assignment */
-			person_gender_assignment: Array<string>;
-			/** Person Ethnic Group Membership Assertion */
-			person_ethnic_group_membership_assertion: Array<string>;
-			/** Person Population Membership Assertion */
-			person_population_membership_assertion: Array<string>;
-			/** Person Part Of Manifest Group Assertion */
-			person_part_of_manifest_group_assertion: Array<string>;
-			/** Person Social Relationship */
-			person_social_relationship: Array<string>;
-			/** Person Language Skill */
-			person_language_skill: Array<string>;
-			/** Person Social Role */
-			person_social_role: Array<string>;
-			/** Person Legal Role */
-			person_legal_role: Array<string>;
-			/** Person Religious Affiliation */
-			person_religious_affiliation: Array<string>;
-			/** Person Possession Assertion */
-			person_possession_assertion: Array<string>;
-			/** Person Death Of Person */
-			person_death_of_person: string | null;
 		};
 		/** Page[Author_group] */
 		Page_Author_group_: {
@@ -687,10 +672,10 @@ export interface components {
 			/** Pages */
 			pages: number;
 		};
-		/** Page[Place] */
-		Page_Place_: {
+		/** Page[Places] */
+		Page_Places_: {
 			/** Items */
-			items: Array<components["schemas"]["Place"]>;
+			items: Array<components["schemas"]["Places"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -855,7 +840,7 @@ export interface components {
 			/** Person Death Of Person */
 			person_death_of_person: string | null;
 		};
-		Place: {
+		Places: {
 			/**
 			 * Id
 			 * Format: uri
@@ -864,7 +849,22 @@ export interface components {
 			/** Place Display Name */
 			place_display_name: string | null;
 			/** Place Id Assignment */
-			place_id_assignment: Array<string>;
+			place_id_assignment: Array<components["schemas"]["releven_places__IdentityInOtherServices"]>;
+			/** N Assertions */
+			n_assertions: number;
+		};
+		PlacesDetail: {
+			/**
+			 * Id
+			 * Format: uri
+			 */
+			id: string;
+			/** Place Display Name */
+			place_display_name: string | null;
+			/** Place Id Assignment */
+			place_id_assignment: Array<
+				components["schemas"]["releven_places_detail__IdentityInOtherServices"]
+			>;
 			/** Place Name Of Place Assertion */
 			place_name_of_place_assertion: Array<string>;
 			/** Place Part Of Place Assertion */
@@ -994,10 +994,7 @@ export interface components {
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__11:
-			| "id"
-			| "place_display_name"
-			| "place_spatiotemporal_existence";
+		rdfproxy__utils__models__OrderByEnum__11: "id" | "place_display_name" | "n_assertions";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
@@ -1077,8 +1074,12 @@ export interface components {
 		releven_people__IdentityInOtherServices: {
 			person_id_assignment_identifier?: components["schemas"]["ExternalIdentifier"] | null;
 			person_id_assignment_by?:
-				| components["schemas"]["IdentityInOtherServices_ExternalAuthority"]
+				| components["schemas"]["releven_people__IdentityInOtherServices_ExternalAuthority"]
 				| null;
+		};
+		releven_people__IdentityInOtherServices_ExternalAuthority: {
+			/** External Authority Display Name */
+			external_authority_display_name: string | null;
 		};
 		releven_people__NameOfPersonAssertion: {
 			/** Person Name Of Person Is */
@@ -1098,6 +1099,32 @@ export interface components {
 			person_name_of_person_src?: components["schemas"]["NameOfPersonAssertion_Passage"] | null;
 			/** Person Name Of Person Based */
 			person_name_of_person_based: string | null;
+		};
+		releven_places__IdentityInOtherServices: {
+			/** Place Id Assignment Identifier */
+			place_id_assignment_identifier: string | null;
+			place_id_assignment_by?:
+				| components["schemas"]["releven_places__IdentityInOtherServices_ExternalAuthority"]
+				| null;
+		};
+		releven_places__IdentityInOtherServices_ExternalAuthority: {
+			/** External Authority Display Name */
+			external_authority_display_name: string | null;
+			/** External Authority Has Member Assertion */
+			external_authority_has_member_assertion: Array<string>;
+		};
+		releven_places_detail__IdentityInOtherServices: {
+			/** Place Id Assignment Identifier */
+			place_id_assignment_identifier: string | null;
+			place_id_assignment_by?:
+				| components["schemas"]["releven_places_detail__IdentityInOtherServices_ExternalAuthority"]
+				| null;
+		};
+		releven_places_detail__IdentityInOtherServices_ExternalAuthority: {
+			/** External Authority Display Name */
+			external_authority_display_name: string | null;
+			/** External Authority Has Member Assertion */
+			external_authority_has_member_assertion: Array<string>;
 		};
 		releven_text__Creation: {
 			/** Written Text Creation Time Frame Assertion */
@@ -1460,13 +1487,14 @@ export interface operations {
 			};
 		};
 	};
-	releven_place_place_get: {
+	releven_places_places_get: {
 		parameters: {
 			query?: {
 				page?: number;
 				size?: number;
 				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__11"] | null;
 				desc?: boolean | null;
+				query?: string | null;
 			};
 			header?: never;
 			path?: never;
@@ -1478,7 +1506,34 @@ export interface operations {
 			200: {
 				headers: Record<string, unknown>;
 				content: {
-					"application/json": components["schemas"]["Page_Place_"];
+					"application/json": components["schemas"]["Page_Places_"];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["HTTPValidationError"];
+				};
+			};
+		};
+	};
+	releven_places_detail_places_detail_get: {
+		parameters: {
+			query: {
+				id: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["PlacesDetail"];
 				};
 			};
 			/** @description Validation Error */

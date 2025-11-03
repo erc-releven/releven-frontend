@@ -30,11 +30,12 @@ function wrapPerson(item: components["schemas"]["People"]): SearchRecord {
 	};
 }
 
-function wrapPlace(item: components["schemas"]["Place"]): SearchRecord {
+function wrapPlace(item: components["schemas"]["Places"]): SearchRecord {
 	return {
 		type: "places",
 		id: item.id,
 		name: item.place_display_name!,
+		n_assertions: item.n_assertions,
 	};
 }
 
@@ -51,7 +52,7 @@ const typesToEndpoints: Record<
 	{ path: keyof paths; wrapper: (data: never) => SearchRecord }
 > = {
 	people: { path: "/people", wrapper: wrapPerson },
-	places: { path: "/place", wrapper: wrapPlace },
+	places: { path: "/places", wrapper: wrapPlace },
 	texts: { path: "/text", wrapper: wrapText },
 };
 
