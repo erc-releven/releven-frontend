@@ -457,6 +457,18 @@ export interface components {
 			/** Boulloterion Ownership */
 			boulloterion_ownership: string | null;
 		};
+		Creation: {
+			/** Written Text Creation Time Frame Assertion */
+			written_text_creation_time_frame_assertion: Array<string>;
+			/** Written Text Creation Author Assertion */
+			written_text_creation_author_assertion: Array<components["schemas"]["AuthorAssertion"]>;
+			/** Written Text Creation Place Assertion */
+			written_text_creation_place_assertion: Array<string>;
+			/** Written Text Creation Copied From Assertion */
+			written_text_creation_copied_from_assertion: Array<string>;
+			/** Written Text Creation Translated From Assertion */
+			written_text_creation_translated_from_assertion: Array<string>;
+		};
 		Ethnic_group: {
 			/**
 			 * Id
@@ -465,10 +477,6 @@ export interface components {
 			id: string;
 			/** Ethnic Group Display Name */
 			ethnic_group_display_name: string | null;
-		};
-		ExternalIdentifier: {
-			/** Person Id Assignment Identifier Plain */
-			person_id_assignment_identifier_plain: string | null;
 		};
 		External_authority: {
 			/**
@@ -943,15 +951,8 @@ export interface components {
 			id: string;
 			/** Written Text Display Name */
 			written_text_display_name: string | null;
-			/** Written Text Title Assertion */
-			written_text_title_assertion: Array<string>;
-			written_text_creation?: components["schemas"]["releven_text__Creation"] | null;
-			/** Written Text Published As Assertion */
-			written_text_published_as_assertion: Array<string>;
-			/** Written Text Written In Assertion */
-			written_text_written_in_assertion: Array<string>;
-			/** Written Text Version Of Assertion */
-			written_text_version_of_assertion: Array<string>;
+			/** N Assertions */
+			n_assertions: number;
 		};
 		TextDetail: {
 			/**
@@ -963,7 +964,7 @@ export interface components {
 			written_text_display_name: string | null;
 			/** Written Text Title Assertion */
 			written_text_title_assertion: Array<string>;
-			written_text_creation?: components["schemas"]["releven_text_detail__Creation"] | null;
+			written_text_creation?: components["schemas"]["Creation"] | null;
 			/** Written Text Published As Assertion */
 			written_text_published_as_assertion: Array<string>;
 			/** Written Text Written In Assertion */
@@ -1027,7 +1028,7 @@ export interface components {
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__17: "id" | "written_text_display_name";
+		rdfproxy__utils__models__OrderByEnum__17: "id" | "written_text_display_name" | "n_assertions";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
@@ -1071,8 +1072,14 @@ export interface components {
 		 * @enum {string}
 		 */
 		rdfproxy__utils__models__OrderByEnum__9: "id" | "passage_reference_string" | "passage_content";
+		releven_people__ExternalIdentifier: {
+			/** Person Id Assignment Identifier Plain */
+			person_id_assignment_identifier_plain: string | null;
+		};
 		releven_people__IdentityInOtherServices: {
-			person_id_assignment_identifier?: components["schemas"]["ExternalIdentifier"] | null;
+			person_id_assignment_identifier?:
+				| components["schemas"]["releven_people__ExternalIdentifier"]
+				| null;
 			person_id_assignment_by?:
 				| components["schemas"]["releven_people__IdentityInOtherServices_ExternalAuthority"]
 				| null;
@@ -1085,8 +1092,14 @@ export interface components {
 			/** Person Name Of Person Is */
 			person_name_of_person_is: string | null;
 		};
+		releven_people_detail__ExternalIdentifier: {
+			/** Person Id Assignment Identifier Plain */
+			person_id_assignment_identifier_plain: string | null;
+		};
 		releven_people_detail__IdentityInOtherServices: {
-			person_id_assignment_identifier?: components["schemas"]["ExternalIdentifier"] | null;
+			person_id_assignment_identifier?:
+				| components["schemas"]["releven_people_detail__ExternalIdentifier"]
+				| null;
 			/** Person Id Assignment By */
 			person_id_assignment_by: string | null;
 		};
@@ -1100,9 +1113,14 @@ export interface components {
 			/** Person Name Of Person Based */
 			person_name_of_person_based: string | null;
 		};
+		releven_places__ExternalIdentifier: {
+			/** Place Id Assignment Identifier Plain */
+			place_id_assignment_identifier_plain: string | null;
+		};
 		releven_places__IdentityInOtherServices: {
-			/** Place Id Assignment Identifier */
-			place_id_assignment_identifier: string | null;
+			place_id_assignment_identifier?:
+				| components["schemas"]["releven_places__ExternalIdentifier"]
+				| null;
 			place_id_assignment_by?:
 				| components["schemas"]["releven_places__IdentityInOtherServices_ExternalAuthority"]
 				| null;
@@ -1125,30 +1143,6 @@ export interface components {
 			external_authority_display_name: string | null;
 			/** External Authority Has Member Assertion */
 			external_authority_has_member_assertion: Array<string>;
-		};
-		releven_text__Creation: {
-			/** Written Text Creation Time Frame Assertion */
-			written_text_creation_time_frame_assertion: Array<string>;
-			/** Written Text Creation Author Assertion */
-			written_text_creation_author_assertion: Array<string>;
-			/** Written Text Creation Place Assertion */
-			written_text_creation_place_assertion: Array<string>;
-			/** Written Text Creation Copied From Assertion */
-			written_text_creation_copied_from_assertion: Array<string>;
-			/** Written Text Creation Translated From Assertion */
-			written_text_creation_translated_from_assertion: Array<string>;
-		};
-		releven_text_detail__Creation: {
-			/** Written Text Creation Time Frame Assertion */
-			written_text_creation_time_frame_assertion: Array<string>;
-			/** Written Text Creation Author Assertion */
-			written_text_creation_author_assertion: Array<components["schemas"]["AuthorAssertion"]>;
-			/** Written Text Creation Place Assertion */
-			written_text_creation_place_assertion: Array<string>;
-			/** Written Text Creation Copied From Assertion */
-			written_text_creation_copied_from_assertion: Array<string>;
-			/** Written Text Creation Translated From Assertion */
-			written_text_creation_translated_from_assertion: Array<string>;
 		};
 	};
 	responses: never;
