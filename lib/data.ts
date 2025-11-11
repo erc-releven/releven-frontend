@@ -44,6 +44,7 @@ function wrapText(item: components["schemas"]["Text"]): SearchRecord {
 		type: "texts",
 		id: item.id,
 		name: item.written_text_display_name!,
+		n_assertions: item.n_assertions,
 	};
 }
 

@@ -6,7 +6,7 @@ export interface SearchRecord {
 	id: string;
 	name: string;
 	description?: string;
-	n_assertions?: number;
+	n_assertions: number;
 	type: SearchRecordType;
 }
 

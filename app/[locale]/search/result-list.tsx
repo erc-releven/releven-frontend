@@ -58,9 +58,7 @@ export function ResultList(props: Readonly<ResultListProps>) {
 											{it.name}
 										</Link>
 										<p>{it.description}</p>
-										{it.n_assertions ? (
-											<p>{t("n_assertions", { count: it.n_assertions })}</p>
-										) : null}
+										<p>{t("n_assertions", { count: it.n_assertions })}</p>
 									</div>
 								</li>
 							);
