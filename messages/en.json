@@ -163,6 +163,12 @@
 		"PeoplePage": {
 			"ethnicity": "Ethnicity",
 			"gender_assignment": "Gender assignment",
+			"tabs": {
+				"identity": "identity",
+				"life_events": "life events",
+				"cursus": "cursus",
+				"viewpoints": "viewpoints"
+			},
 			"legal_role": "Legal role",
 			"name": "Name",
 			"religious_affiliation": "Religious affiliation"
