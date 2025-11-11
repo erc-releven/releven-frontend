@@ -154,6 +154,20 @@
 		},
 		"title": "Page not found"
 	},
+	"ResourcesPage": {
+		"according_to": "according to",
+		"based_on": "based on",
+		"mentioned_in": "mentioned in",
+		"relation_to_person": "Relation to persons",
+		"relation_to_places": "Relation to places",
+		"PeoplePage": {
+			"ethnicity": "Ethnicity",
+			"gender_assignment": "Gender assignment",
+			"legal_role": "Legal role",
+			"name": "Name",
+			"religious_affiliation": "Religious affiliation"
+		}
+	},
 	"SearchPage": {
 		"filter": {
 			"headline": "Refine your search",

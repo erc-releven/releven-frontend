@@ -11,6 +11,7 @@ interface EntityDetailsProps {
 	title?: string | null;
 	details?: object;
 	prefix?: string;
+	children?: ReactNode;
 }
 
 function keyToNiceLabel(key: string): string {
