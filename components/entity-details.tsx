@@ -1,10 +1,9 @@
 "use client";
-import { ChevronRightIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
-import { Disclosure, DisclosurePanel, Heading } from "react-aria-components";
 
-import { Button } from "./ui/button";
+import { PreDisclosure } from "@/app/[locale]/_components/pre-disclosure";
+
 import { MainContent } from "./ui/main-content";
 
 interface EntityDetailsProps {
@@ -70,23 +69,13 @@ function objectToReactNode(o: unknown, prefix = ""): ReactNode | undefined {
 }
 
 export function EntityDetails(props: Readonly<EntityDetailsProps>): ReactNode {
-	const { title, details, prefix } = props;
+	const { title, details, prefix, children } = props;
 	if (details) {
 		return (
 			<MainContent className="mx-auto w-full max-w-screen-xl px-8">
 				<h1>{title}</h1>
-				<div>{objectToReactNode(details, prefix)}</div>
-				<Disclosure className="m-8">
-					<Heading>
-						<Button slot="trigger">
-							{"show raw data"}
-							<ChevronRightIcon aria-hidden={true} data-slot="icon" size={12} />
-						</Button>
-					</Heading>
-					<DisclosurePanel>
-						<pre className="mt-4 border-1 p-2">{JSON.stringify(details, null, 2)}</pre>
-					</DisclosurePanel>
-				</Disclosure>
+				{children ?? <div>{objectToReactNode(details, prefix)}</div>}
+				<PreDisclosure content={JSON.stringify(details, null, 2)} />
 			</MainContent>
 		);
 	} else {
