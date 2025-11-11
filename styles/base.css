@@ -132,4 +132,23 @@
 	tr {
 		@apply even:bg-table-alternate-row;
 	}
+
+	/* stylelint-disable selector-class-pattern */
+	.react-aria-Tabs {
+		@apply border;
+
+		.react-aria-TabList {
+			@apply border flex flex-row;
+
+			> div {
+				@apply px-6 py-3 uppercase bg-white data-selected:bg-primary-500 data-selected:text-white;
+			}
+		}
+
+		.react-aria-TabPanel {
+			@apply flex flex-col gap-6 p-6;
+		}
+	}
+
+	/* stylelint-enable selector-class-pattern */
 }
