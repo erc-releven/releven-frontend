@@ -744,6 +744,11 @@
 @theme {
 	--color-primary: rgb(45 58 104);
 	--color-on-primary: theme("colors.neutral.50");
+	--color-primary-500: rgb(71 95 154);
+	--color-on-primary-500: rgb(255 255 255);
+	--color-table-header: rgb(77 101 168 / 20%);
+	--color-table-alternate-row: rgb(217 217 217 / 20%);
+	--color-table-text: rgb(68 68 68);
 	--color-secondary: rgb(225 155 43);
 	--color-on-secondary: theme("colors.neutral.900");
 	--color-text-strong: rgb(0 0 0);

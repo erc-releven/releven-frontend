@@ -82,7 +82,7 @@
 	}
 
 	/** Scale up hit targets on high resolution devices. */
-	@media (resolution >= 200dpi) {
+	@media (resolution >=200dpi) {
 		:root {
 			font-size: 18px;
 		}
@@ -114,5 +114,22 @@
 		p {
 			@apply my-2;
 		}
+	}
+
+	/** TODO rounded corners of tables need to be applied to first/last element **/
+	table {
+		@apply border text-table-text;
+	}
+
+	td {
+		@apply p-2.5;
+	}
+
+	th {
+		@apply bg-table-header text-left p-2.5;
+	}
+
+	tr {
+		@apply even:bg-table-alternate-row;
 	}
 }
