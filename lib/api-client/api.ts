@@ -101,6 +101,40 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/geopolitical_event": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Releven Geopolitical Event */
+		get: operations["releven_geopolitical_event_geopolitical_event_get"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/journey": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Releven Journey */
+		get: operations["releven_journey_journey_get"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/language": {
 		parameters: {
 			query?: never;
@@ -127,6 +161,23 @@ export interface paths {
 		};
 		/** Releven Legal Status */
 		get: operations["releven_legal_status_legal_status_get"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/manuscript": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Releven Manuscript */
+		get: operations["releven_manuscript_manuscript_get"];
 		put?: never;
 		post?: never;
 		delete?: never;
@@ -169,6 +220,23 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/people/cursus": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Releven People Cursus */
+		get: operations["releven_people_cursus_people_cursus_get"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/people/detail": {
 		parameters: {
 			query?: never;
@@ -178,6 +246,40 @@ export interface paths {
 		};
 		/** Releven People Detail */
 		get: operations["releven_people_detail_people_detail_get"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/people/identity": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Releven People Identity */
+		get: operations["releven_people_identity_people_identity_get"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/people/life_events": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Releven People Life Events */
+		get: operations["releven_people_life_events_people_life_events_get"];
 		put?: never;
 		post?: never;
 		delete?: never;
@@ -457,6 +559,18 @@ export interface components {
 			/** Boulloterion Ownership */
 			boulloterion_ownership: string | null;
 		};
+		CategorisationAssertion: {
+			/** Social Relationship Categorisation Is */
+			social_relationship_categorisation_is: string | null;
+			/** Social Relationship Categorisation By */
+			social_relationship_categorisation_by: string | null;
+			/** Social Relationship Categorisation By Group */
+			social_relationship_categorisation_by_group: string | null;
+			/** Social Relationship Categorisation Src */
+			social_relationship_categorisation_src: string | null;
+			/** Social Relationship Categorisation Based */
+			social_relationship_categorisation_based: string | null;
+		};
 		Creation: {
 			/** Written Text Creation Time Frame Assertion */
 			written_text_creation_time_frame_assertion: Array<string>;
@@ -498,21 +612,68 @@ export interface components {
 			/** Gender Display Name */
 			gender_display_name: string | null;
 		};
-		GenderAssertion: {
-			person_gender_assignment_gender_is?: components["schemas"]["GenderAssertion_Gender"] | null;
-		};
-		GenderAssertion_Gender: {
-			/** Gender Display Name */
-			gender_display_name: string | null;
-		};
-		GenderAssignment: {
-			/** Person Gender Assignment Gender Assertion */
-			person_gender_assignment_gender_assertion: Array<components["schemas"]["GenderAssertion"]>;
+		Geopolitical_event: {
+			/**
+			 * Id
+			 * Format: uri
+			 */
+			id: string;
+			/** Geopolitical Event Display Name */
+			geopolitical_event_display_name: string | null;
+			/** Geopolitical Event Type Of Event Assertion */
+			geopolitical_event_type_of_event_assertion: Array<string>;
+			/** Geopolitical Event Active Party Assertion */
+			geopolitical_event_active_party_assertion: Array<string>;
+			/** Geopolitical Event Attack Event */
+			geopolitical_event_attack_event: string | null;
+			/** Geopolitical Event Involved Party Assertion */
+			geopolitical_event_involved_party_assertion: Array<string>;
+			/** Geopolitical Event Created Assertion */
+			geopolitical_event_created_assertion: Array<string>;
+			/** Geopolitical Event Destroyed Assertion */
+			geopolitical_event_destroyed_assertion: Array<string>;
 		};
 		/** HTTPValidationError */
 		HTTPValidationError: {
 			/** Detail */
 			detail?: Array<components["schemas"]["ValidationError"]>;
+		};
+		InPublicationAssertion: {
+			/** Passage In Publication Is */
+			passage_in_publication_is: string | null;
+			/** Passage In Publication By */
+			passage_in_publication_by: string | null;
+			/** Passage In Publication By Group */
+			passage_in_publication_by_group: string | null;
+			/** Passage In Publication Src */
+			passage_in_publication_src: string | null;
+			/** Passage In Publication Based */
+			passage_in_publication_based: string | null;
+		};
+		Journey: {
+			/**
+			 * Id
+			 * Format: uri
+			 */
+			id: string;
+			/** Journey Display Name */
+			journey_display_name: string | null;
+			/** Journey Included Visit */
+			journey_included_visit: Array<string>;
+			/** Journey Designated Origin Assertion */
+			journey_designated_origin_assertion: Array<string>;
+			/** Journey Designated Destination Assertion */
+			journey_designated_destination_assertion: Array<string>;
+			/** Journey Starting Point Assertion */
+			journey_starting_point_assertion: Array<string>;
+			/** Journey Endpoint Assertion */
+			journey_endpoint_assertion: Array<string>;
+			/** Journey Time Frame Assertion */
+			journey_time_frame_assertion: Array<string>;
+			/** Journey Under Authority Assertion */
+			journey_under_authority_assertion: Array<string>;
+			/** Journey Undertaken By Assertion */
+			journey_undertaken_by_assertion: Array<string>;
 		};
 		Language: {
 			/**
@@ -532,23 +693,52 @@ export interface components {
 			/** Legal Status Display Name */
 			legal_status_display_name: string | null;
 		};
-		NameOfPersonAssertion_Passage: {
-			/** Passage Reference String */
-			passage_reference_string: string | null;
-			/** Passage Content */
-			passage_content: string | null;
-			/** Passage In Publication Assertion */
-			passage_in_publication_assertion: Array<string>;
-			/** Passage On Object Assertion */
-			passage_on_object_assertion: Array<string>;
-			/** Passage On Boulloterion Assertion */
-			passage_on_boulloterion_assertion: Array<string>;
-			/** Passage Text Language Assertion */
-			passage_text_language_assertion: Array<string>;
+		Manuscript: {
+			/**
+			 * Id
+			 * Format: uri
+			 */
+			id: string;
+			/** Manuscript Display Name */
+			manuscript_display_name: string | null;
+			/** Manuscript Id Assignment */
+			manuscript_id_assignment: Array<string>;
+			/** Manuscript Type Of Manuscript Assertion */
+			manuscript_type_of_manuscript_assertion: Array<string>;
+			/** Manuscript Production */
+			manuscript_production: string | null;
+			/** Manuscript Ownership Change */
+			manuscript_ownership_change: Array<string>;
+			/** Manuscript Material Assertion */
+			manuscript_material_assertion: Array<string>;
 		};
-		NameOfPersonAssertion_Person: {
-			/** Person Display Name */
-			person_display_name: string | null;
+		NameOfPersonAssertion: {
+			/** Person Name Of Person Is */
+			person_name_of_person_is: string | null;
+		};
+		OnBoulloterionAssertion: {
+			/** Passage On Boulloterion Is */
+			passage_on_boulloterion_is: string | null;
+			/** Passage On Boulloterion By */
+			passage_on_boulloterion_by: string | null;
+			/** Passage On Boulloterion By Group */
+			passage_on_boulloterion_by_group: string | null;
+			/** Passage On Boulloterion Src */
+			passage_on_boulloterion_src: string | null;
+			/** Passage On Boulloterion Based */
+			passage_on_boulloterion_based: string | null;
+		};
+		OnObjectAssertion: {
+			/** Passage On Object Is */
+			passage_on_object_is: string | null;
+			/** Passage On Object By */
+			passage_on_object_by: string | null;
+			/** Passage On Object By Group */
+			passage_on_object_by_group: string | null;
+			/** Passage On Object Src */
+			passage_on_object_src: string | null;
+			/** Passage On Object Based */
+			passage_on_object_based: string | null;
 		};
 		/** Page[Author_group] */
 		Page_Author_group_: {
@@ -628,6 +818,32 @@ export interface components {
 			/** Pages */
 			pages: number;
 		};
+		/** Page[Geopolitical_event] */
+		Page_Geopolitical_event_: {
+			/** Items */
+			items: Array<components["schemas"]["Geopolitical_event"]>;
+			/** Page */
+			page: number;
+			/** Size */
+			size: number;
+			/** Total */
+			total: number;
+			/** Pages */
+			pages: number;
+		};
+		/** Page[Journey] */
+		Page_Journey_: {
+			/** Items */
+			items: Array<components["schemas"]["Journey"]>;
+			/** Page */
+			page: number;
+			/** Size */
+			size: number;
+			/** Total */
+			total: number;
+			/** Pages */
+			pages: number;
+		};
 		/** Page[Language] */
 		Page_Language_: {
 			/** Items */
@@ -645,6 +861,19 @@ export interface components {
 		Page_Legal_status_: {
 			/** Items */
 			items: Array<components["schemas"]["Legal_status"]>;
+			/** Page */
+			page: number;
+			/** Size */
+			size: number;
+			/** Total */
+			total: number;
+			/** Pages */
+			pages: number;
+		};
+		/** Page[Manuscript] */
+		Page_Manuscript_: {
+			/** Items */
+			items: Array<components["schemas"]["Manuscript"]>;
 			/** Page */
 			page: number;
 			/** Size */
@@ -782,13 +1011,13 @@ export interface components {
 			/** Passage Content */
 			passage_content: string | null;
 			/** Passage In Publication Assertion */
-			passage_in_publication_assertion: Array<string>;
+			passage_in_publication_assertion: Array<components["schemas"]["InPublicationAssertion"]>;
 			/** Passage On Object Assertion */
-			passage_on_object_assertion: Array<string>;
+			passage_on_object_assertion: Array<components["schemas"]["OnObjectAssertion"]>;
 			/** Passage On Boulloterion Assertion */
-			passage_on_boulloterion_assertion: Array<string>;
+			passage_on_boulloterion_assertion: Array<components["schemas"]["OnBoulloterionAssertion"]>;
 			/** Passage Text Language Assertion */
-			passage_text_language_assertion: Array<string>;
+			passage_text_language_assertion: Array<components["schemas"]["TextLanguageAssertion"]>;
 		};
 		People: {
 			/**
@@ -801,11 +1030,20 @@ export interface components {
 			/** Person Id Assignment */
 			person_id_assignment: Array<components["schemas"]["releven_people__IdentityInOtherServices"]>;
 			/** Person Name Of Person Assertion */
-			person_name_of_person_assertion: Array<
-				components["schemas"]["releven_people__NameOfPersonAssertion"]
-			>;
+			person_name_of_person_assertion: Array<components["schemas"]["NameOfPersonAssertion"]>;
 			/** N Assertions */
 			n_assertions: number;
+		};
+		PeopleCursus: {
+			/**
+			 * Id
+			 * Format: uri
+			 */
+			id: string;
+			/** Person Social Role */
+			person_social_role: Array<string>;
+			/** Person Legal Role */
+			person_legal_role: Array<string>;
 		};
 		PeopleDetail: {
 			/**
@@ -816,35 +1054,39 @@ export interface components {
 			/** Person Display Name */
 			person_display_name: string | null;
 			/** Person Id Assignment */
-			person_id_assignment: Array<
-				components["schemas"]["releven_people_detail__IdentityInOtherServices"]
-			>;
+			person_id_assignment: Array<string>;
+		};
+		PeopleIdentity: {
+			/**
+			 * Id
+			 * Format: uri
+			 */
+			id: string;
 			/** Person Name Of Person Assertion */
-			person_name_of_person_assertion: Array<
-				components["schemas"]["releven_people_detail__NameOfPersonAssertion"]
-			>;
-			/** Person Birth Of Person */
-			person_birth_of_person: string | null;
-			/** Person Gender Assignment */
-			person_gender_assignment: Array<components["schemas"]["GenderAssignment"]>;
+			person_name_of_person_assertion: Array<string>;
 			/** Person Ethnic Group Membership Assertion */
 			person_ethnic_group_membership_assertion: Array<string>;
 			/** Person Population Membership Assertion */
 			person_population_membership_assertion: Array<string>;
 			/** Person Part Of Manifest Group Assertion */
 			person_part_of_manifest_group_assertion: Array<string>;
-			/** Person Social Relationship */
-			person_social_relationship: Array<string>;
-			/** Person Language Skill */
-			person_language_skill: Array<string>;
-			/** Person Social Role */
-			person_social_role: Array<string>;
-			/** Person Legal Role */
-			person_legal_role: Array<string>;
-			/** Person Religious Affiliation */
-			person_religious_affiliation: Array<string>;
 			/** Person Possession Assertion */
 			person_possession_assertion: Array<string>;
+		};
+		PeopleLife_events: {
+			/**
+			 * Id
+			 * Format: uri
+			 */
+			id: string;
+			/** Person Birth Of Person */
+			person_birth_of_person: string | null;
+			/** Person Gender Assignment */
+			person_gender_assignment: Array<string>;
+			/** Person Language Skill */
+			person_language_skill: Array<string>;
+			/** Person Religious Affiliation */
+			person_religious_affiliation: Array<string>;
 			/** Person Death Of Person */
 			person_death_of_person: string | null;
 		};
@@ -941,7 +1183,9 @@ export interface components {
 			/** Social Relationship Display Name */
 			social_relationship_display_name: string | null;
 			/** Social Relationship Categorisation Assertion */
-			social_relationship_categorisation_assertion: Array<string>;
+			social_relationship_categorisation_assertion: Array<
+				components["schemas"]["CategorisationAssertion"]
+			>;
 		};
 		Text: {
 			/**
@@ -972,6 +1216,18 @@ export interface components {
 			/** Written Text Version Of Assertion */
 			written_text_version_of_assertion: Array<string>;
 		};
+		TextLanguageAssertion: {
+			/** Passage Text Language Is */
+			passage_text_language_is: string | null;
+			/** Passage Text Language By */
+			passage_text_language_by: string | null;
+			/** Passage Text Language By Group */
+			passage_text_language_by_group: string | null;
+			/** Passage Text Language Src */
+			passage_text_language_src: string | null;
+			/** Passage Text Language Based */
+			passage_text_language_based: string | null;
+		};
 		/** ValidationError */
 		ValidationError: {
 			/** Location */
@@ -990,17 +1246,35 @@ export interface components {
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__10: "id" | "person_display_name" | "n_assertions";
+		rdfproxy__utils__models__OrderByEnum__10: "id" | "legal_status_display_name";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__11: "id" | "place_display_name" | "n_assertions";
+		rdfproxy__utils__models__OrderByEnum__11:
+			| "id"
+			| "manuscript_display_name"
+			| "manuscript_production";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__12:
+		rdfproxy__utils__models__OrderByEnum__12: "id" | "passage_reference_string" | "passage_content";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__13: "id" | "person_display_name" | "n_assertions";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__14: "id" | "place_display_name" | "n_assertions";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__15:
 			| "id"
 			| "publication_display_name"
 			| "publication_creation";
@@ -1008,32 +1282,32 @@ export interface components {
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__13: "id" | "religious_affiliation_display_name";
+		rdfproxy__utils__models__OrderByEnum__16: "id" | "religious_affiliation_display_name";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__14: "id" | "seal_seal_id";
+		rdfproxy__utils__models__OrderByEnum__17: "id" | "seal_seal_id";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__15: "id" | "seal_collection_display_name";
+		rdfproxy__utils__models__OrderByEnum__18: "id" | "seal_collection_display_name";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__16: "id" | "social_relationship_display_name";
-		/**
-		 * OrderByEnum
-		 * @enum {string}
-		 */
-		rdfproxy__utils__models__OrderByEnum__17: "id" | "written_text_display_name" | "n_assertions";
+		rdfproxy__utils__models__OrderByEnum__19: "id" | "social_relationship_display_name";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
 		 */
 		rdfproxy__utils__models__OrderByEnum__2: "id";
+		/**
+		 * OrderByEnum
+		 * @enum {string}
+		 */
+		rdfproxy__utils__models__OrderByEnum__20: "id" | "written_text_display_name" | "n_assertions";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
@@ -1061,17 +1335,20 @@ export interface components {
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__7: "id" | "language_display_name";
+		rdfproxy__utils__models__OrderByEnum__7:
+			| "id"
+			| "geopolitical_event_display_name"
+			| "geopolitical_event_attack_event";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__8: "id" | "legal_status_display_name";
+		rdfproxy__utils__models__OrderByEnum__8: "id" | "journey_display_name";
 		/**
 		 * OrderByEnum
 		 * @enum {string}
 		 */
-		rdfproxy__utils__models__OrderByEnum__9: "id" | "passage_reference_string" | "passage_content";
+		rdfproxy__utils__models__OrderByEnum__9: "id" | "language_display_name";
 		releven_people__ExternalIdentifier: {
 			/** Person Id Assignment Identifier Plain */
 			person_id_assignment_identifier_plain: string | null;
@@ -1087,31 +1364,6 @@ export interface components {
 		releven_people__IdentityInOtherServices_ExternalAuthority: {
 			/** External Authority Display Name */
 			external_authority_display_name: string | null;
-		};
-		releven_people__NameOfPersonAssertion: {
-			/** Person Name Of Person Is */
-			person_name_of_person_is: string | null;
-		};
-		releven_people_detail__ExternalIdentifier: {
-			/** Person Id Assignment Identifier Plain */
-			person_id_assignment_identifier_plain: string | null;
-		};
-		releven_people_detail__IdentityInOtherServices: {
-			person_id_assignment_identifier?:
-				| components["schemas"]["releven_people_detail__ExternalIdentifier"]
-				| null;
-			/** Person Id Assignment By */
-			person_id_assignment_by: string | null;
-		};
-		releven_people_detail__NameOfPersonAssertion: {
-			/** Person Name Of Person Is */
-			person_name_of_person_is: string | null;
-			person_name_of_person_by?: components["schemas"]["NameOfPersonAssertion_Person"] | null;
-			/** Person Name Of Person By Group */
-			person_name_of_person_by_group: string | null;
-			person_name_of_person_src?: components["schemas"]["NameOfPersonAssertion_Passage"] | null;
-			/** Person Name Of Person Based */
-			person_name_of_person_based: string | null;
 		};
 		releven_places__ExternalIdentifier: {
 			/** Place Id Assignment Identifier Plain */
@@ -1333,12 +1585,72 @@ export interface operations {
 			};
 		};
 	};
-	releven_language_language_get: {
+	releven_geopolitical_event_geopolitical_event_get: {
 		parameters: {
 			query?: {
 				page?: number;
 				size?: number;
 				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__7"] | null;
+				desc?: boolean | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["Page_Geopolitical_event_"];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["HTTPValidationError"];
+				};
+			};
+		};
+	};
+	releven_journey_journey_get: {
+		parameters: {
+			query?: {
+				page?: number;
+				size?: number;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__8"] | null;
+				desc?: boolean | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["Page_Journey_"];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["HTTPValidationError"];
+				};
+			};
+		};
+	};
+	releven_language_language_get: {
+		parameters: {
+			query?: {
+				page?: number;
+				size?: number;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__9"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1368,7 +1680,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__8"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__10"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1393,12 +1705,42 @@ export interface operations {
 			};
 		};
 	};
+	releven_manuscript_manuscript_get: {
+		parameters: {
+			query?: {
+				page?: number;
+				size?: number;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__11"] | null;
+				desc?: boolean | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["Page_Manuscript_"];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["HTTPValidationError"];
+				};
+			};
+		};
+	};
 	releven_passage_passage_get: {
 		parameters: {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__9"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__12"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1428,7 +1770,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__10"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__13"] | null;
 				desc?: boolean | null;
 				query?: string | null;
 			};
@@ -1443,6 +1785,33 @@ export interface operations {
 				headers: Record<string, unknown>;
 				content: {
 					"application/json": components["schemas"]["Page_People_"];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["HTTPValidationError"];
+				};
+			};
+		};
+	};
+	releven_people_cursus_people_cursus_get: {
+		parameters: {
+			query: {
+				id: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["PeopleCursus"];
 				};
 			};
 			/** @description Validation Error */
@@ -1481,12 +1850,66 @@ export interface operations {
 			};
 		};
 	};
+	releven_people_identity_people_identity_get: {
+		parameters: {
+			query: {
+				id: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["PeopleIdentity"];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["HTTPValidationError"];
+				};
+			};
+		};
+	};
+	releven_people_life_events_people_life_events_get: {
+		parameters: {
+			query: {
+				id: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["PeopleLife_events"];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: Record<string, unknown>;
+				content: {
+					"application/json": components["schemas"]["HTTPValidationError"];
+				};
+			};
+		};
+	};
 	releven_places_places_get: {
 		parameters: {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__11"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__14"] | null;
 				desc?: boolean | null;
 				query?: string | null;
 			};
@@ -1544,7 +1967,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__12"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__15"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1574,7 +1997,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__13"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__16"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1604,7 +2027,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__14"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__17"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1634,7 +2057,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__15"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__18"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1664,7 +2087,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__16"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__19"] | null;
 				desc?: boolean | null;
 			};
 			header?: never;
@@ -1694,7 +2117,7 @@ export interface operations {
 			query?: {
 				page?: number;
 				size?: number;
-				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__17"] | null;
+				order_by?: components["schemas"]["rdfproxy__utils__models__OrderByEnum__20"] | null;
 				desc?: boolean | null;
 				query?: string | null;
 			};
