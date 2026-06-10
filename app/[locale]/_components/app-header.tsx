@@ -35,6 +35,11 @@ export function AppHeader(): ReactNode {
 					href: createHref({ pathname: "/search?type=texts" }),
 					label: t("navigation.items.resources.texts.title"),
 				},
+				relationships: {
+					type: "link",
+					href: createHref({ pathname: "/relationships" }),
+					label: t("navigation.items.resources.social-relationships.title"),
+				},
 			},
 		},
 		about: {
