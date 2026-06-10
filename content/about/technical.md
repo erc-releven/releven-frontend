@@ -13,3 +13,11 @@ Linked data and knowledge graph technologies are powerful tools for integrating,
 We address this problem with [`rdfproxy`](https://github.com/acdh-oeaw/rdfproxy), a Python library for mapping SPARQL query results to Pydantic models, which allows building REST APIs on top of SPARQL endpoints.
 
 Toolchain demo: <https://erc-releven.github.io/releven-backend>
+
+## Exploring the data model: the RELEVEN Model Explorer
+
+Understanding the structure of a complex data model such as RELEVEN's STAR-based graph is a prerequisite for working effectively with the data it contains—whether querying the API, contributing new data, or evaluating the project's methodology. To make this accessible to researchers and developers alike, we have built the [RELEVEN Model Explorer](https://erc-releven.github.io/model-explorer/), an interactive browser-based tool for navigating the project's RDF data model.
+
+The Model Explorer is a general-purpose tool that takes any [WissKI](http://wiss-ki.eu/) pathbuilder export file as input and visualises the classes, properties, and relationships defined within it. When loaded with RELEVEN's pathbuilder file, it renders the full structure of the project's knowledge graph as expressed in CIDOC-CRM and the STAR model. Users can browse entity types, follow property chains between them, and inspect the constraints and cardinalities that govern how data is recorded. Crucially, the tool also supports selecting sub-views of the full model -- arbitrary subsets of paths and properties -- and automatically generating the corresponding SPARQL queries and `rdfproxy` Pydantic models for those selections. This closes the loop between data modelling and API development: a researcher can define exactly the slice of the graph they need and immediately obtain working query and model code ready for use with the RELEVEN backend.
+
+The source code is available at <https://github.com/erc-releven/model-explorer>.
