@@ -1,40 +1,27 @@
 "use client";
 
-import "@xyflow/react/dist/style.css";
-
 import {
-	Background,
-	BackgroundVariant,
-	Controls,
-	type Edge,
-	Handle,
-	type Node,
-	type NodeProps,
-	NodeToolbar,
-	Position,
-	ReactFlow,
-	ReactFlowProvider,
-	useNodesState,
-	useReactFlow,
-} from "@xyflow/react";
-import {
-	forceCenter,
 	forceCollide,
-	forceLink,
-	forceManyBody,
-	forceSimulation,
+	type ForceLink,
+	type ForceManyBody,
 	type SimulationLinkDatum,
-	type SimulationNodeDatum,
 } from "d3-force";
+import dynamic from "next/dynamic";
 import {
-	createContext,
+	type ComponentType,
+	type RefObject,
 	useCallback,
-	useContext,
 	useEffect,
 	useMemo,
 	useRef,
 	useState,
 } from "react";
+import type {
+	ForceGraphMethods,
+	ForceGraphProps,
+	LinkObject,
+	NodeObject,
+} from "react-force-graph-2d";
 
 // — Exported types —
 
@@ -69,72 +56,345 @@ export interface GraphEdge {
 
 // — Internal types —
 
-interface EdgeData extends Record<string, unknown> {
+interface FGNodeData {
+	relations: Array<GraphRelation>;
+}
+
+interface FGLinkData {
 	totalCount: number;
 	attestations: Array<EdgeAttestation>;
 }
 
-interface SimNode extends SimulationNodeDatum {
+const ForceGraph2D = dynamic(
+	() => {
+		return import("react-force-graph-2d");
+	},
+	{ ssr: false },
+) as ComponentType<
+	ForceGraphProps<FGNodeData, FGLinkData> & {
+		ref?: RefObject<ForceGraphMethods<FGNodeData, FGLinkData> | undefined>;
+	}
+>;
+
+interface SelectedNode {
 	id: string;
-}
-
-interface SimLink extends SimulationLinkDatum<SimNode> {
-	source: string | SimNode;
-	target: string | SimNode;
-}
-
-interface HoveredEdge {
-	data: EdgeData;
 	x: number;
 	y: number;
 }
 
-// — Node component —
-
-const handleStyle = {
-	opacity: 0,
-	pointerEvents: "none" as const,
-	width: 0,
-	height: 0,
-	minWidth: 0,
-	minHeight: 0,
-	top: "50%",
-	left: "50%",
-	transform: "translate(-50%, -50%)",
-};
-
-interface HoverState {
-	hoveredId: string | null;
-	highlightedIds: Set<string> | null;
+interface SelectedEdge {
+	data: FGLinkData;
+	source: string;
+	target: string;
+	x: number;
+	y: number;
 }
 
-const HoveredNodeIdContext = createContext<HoverState>({ hoveredId: null, highlightedIds: null });
+interface Rect {
+	x1: number;
+	y1: number;
+	x2: number;
+	y2: number;
+}
 
-function PointNode({ data, id }: Readonly<NodeProps>) {
-	const { hoveredId, highlightedIds } = useContext(HoveredNodeIdContext);
-	const relations = data.relations as Array<GraphRelation>;
-	const isHighlighted = highlightedIds?.has(id) ?? false;
+function rectsOverlap(a: Rect, b: Rect): boolean {
+	return a.x1 < b.x2 && a.x2 > b.x1 && a.y1 < b.y2 && a.y2 > b.y1;
+}
+
+const NODE_RADIUS = 20;
+const LABEL_FONT_SIZE = 12;
+const LABEL_MIN_SCREEN_RADIUS = 3;
+
+interface RelationshipGraphProps {
+	nodes: Array<GraphNode>;
+	edges: Array<GraphEdge>;
+}
+
+export function RelationshipGraph(props: Readonly<RelationshipGraphProps>) {
+	const { edges: graphEdges, nodes: graphNodes } = props;
+
+	const fgRef = useRef<ForceGraphMethods<FGNodeData, FGLinkData> | undefined>(undefined);
+	const containerRef = useRef<HTMLDivElement>(null);
+	const hasInitializedRef = useRef(false);
+	// Bounding boxes of labels already drawn in the current frame — reset every frame, used to
+	// skip a label when it would overlap one already placed.
+	const labelRectsRef = useRef<Array<Rect>>([]);
+
+	const [size, setSize] = useState({ width: 0, height: 0 });
+	// Drives the neighbor highlight — still hover-driven.
+	const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
+	// Drives the tooltips — click-driven; cleared by clicking the background or the other kind.
+	const [selectedNode, setSelectedNode] = useState<SelectedNode | null>(null);
+	const [selectedEdge, setSelectedEdge] = useState<SelectedEdge | null>(null);
+	// Track hovered edge for visual feedback
+	const [hoveredEdgeId, setHoveredEdgeId] = useState<string | null>(null);
+
+	// Canvas fillStyle can't resolve CSS custom properties, so the design tokens are read once
+	// here. This subtree only ever mounts on the client (see the ssr:false dynamic import above).
+	const [colors] = useState(() => {
+		const style = getComputedStyle(document.documentElement);
+		return {
+			primary: style.getPropertyValue("--color-primary").trim(),
+			secondary: style.getPropertyValue("--color-secondary").trim(),
+			backgroundBase: style.getPropertyValue("--color-background-base").trim(),
+			textStrong: style.getPropertyValue("--color-text-strong").trim(),
+		};
+	});
+
+	useEffect(() => {
+		const el = containerRef.current;
+		if (!el) return;
+		const observer = new ResizeObserver((entries) => {
+			const entry = entries[0];
+			if (!entry) return;
+			const { width, height } = entry.contentRect;
+			setSize({ width, height });
+		});
+		observer.observe(el);
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
+
+	// Runs once, on the first simulation tick — by then the lazily-loaded ForceGraph2D instance
+	// is guaranteed to be mounted and `fgRef.current` populated, unlike a mount-time effect, whose
+	// timing relative to the dynamic import isn't guaranteed.
+	const onEngineTick = useCallback(() => {
+		if (hasInitializedRef.current) return;
+		hasInitializedRef.current = true;
+		const fg = fgRef.current;
+		if (!fg) return;
+		(
+			fg.d3Force("link") as
+				| ForceLink<NodeObject<FGNodeData>, SimulationLinkDatum<NodeObject<FGNodeData>>>
+				| undefined
+		)
+			?.distance(120)
+			.strength(0.3);
+		(fg.d3Force("charge") as ForceManyBody<NodeObject<FGNodeData>> | undefined)?.strength(-250);
+		fg.d3Force("collide", forceCollide<NodeObject<FGNodeData>>(55));
+		fg.zoomToFit(0, 40);
+	}, []);
+
+	const nodeById = useMemo(() => {
+		const map = new Map<string, GraphNode>();
+		for (const n of graphNodes) map.set(n.id, n);
+		return map;
+	}, [graphNodes]);
+
+	const neighborMap = useMemo(() => {
+		const map = new Map<string, Set<string>>();
+		for (const e of graphEdges) {
+			if (!map.has(e.source)) map.set(e.source, new Set());
+			if (!map.has(e.target)) map.set(e.target, new Set());
+			map.get(e.source)!.add(e.target);
+			map.get(e.target)!.add(e.source);
+		}
+		return map;
+	}, [graphEdges]);
+
+	const highlightedIds = useMemo(() => {
+		if (!hoveredNodeId) return null;
+		const neighbors = neighborMap.get(hoveredNodeId) ?? new Set<string>();
+		return new Set([hoveredNodeId, ...neighbors]);
+	}, [hoveredNodeId, neighborMap]);
+
+	// Stable across re-renders — force-graph mutates these objects in place (e.g. it replaces a
+	// link's source/target id with the resolved node object), so this must only be recomputed
+	// when the underlying data actually changes, not on every hover-driven render.
+	// x/y seed the simulation from the server-computed layout instead of a random scatter; they
+	// aren't pinned (no fx/fy), so the force engine is free to keep moving nodes from there.
+	const graphData = useMemo(() => {
+		const nodes: Array<NodeObject<FGNodeData>> = graphNodes.map((n) => {
+			return { id: n.id, x: n.x, y: n.y, relations: n.relations };
+		});
+		const links: Array<LinkObject<FGNodeData, FGLinkData>> = graphEdges.map((e) => {
+			return {
+				id: e.id,
+				source: e.source,
+				target: e.target,
+				totalCount: e.totalCount,
+				attestations: e.attestations,
+			};
+		});
+		return { nodes, links };
+	}, [graphNodes, graphEdges]);
+
+	// Click: center the camera on the clicked node, open its tooltip, keep the layout as-is
+	const onNodeClick = useCallback((node: NodeObject<FGNodeData>, event: MouseEvent) => {
+		if (node.x === undefined || node.y === undefined) return;
+		fgRef.current?.centerAt(node.x, node.y, 600);
+		fgRef.current?.zoom(1, 600);
+		setSelectedEdge(null);
+		setSelectedNode({ id: node.id as string, x: event.clientX, y: event.clientY });
+	}, []);
+
+	const onLinkClick = useCallback((link: LinkObject<FGNodeData, FGLinkData>, event: MouseEvent) => {
+		setSelectedNode(null);
+		const sourceId =
+			typeof link.source === "string" ? link.source : (link.source as NodeObject<FGNodeData>).id;
+		const targetId =
+			typeof link.target === "string" ? link.target : (link.target as NodeObject<FGNodeData>).id;
+		setSelectedEdge({
+			data: { totalCount: link.totalCount, attestations: link.attestations },
+			source: sourceId as string,
+			target: targetId as string,
+			x: event.clientX,
+			y: event.clientY,
+		});
+	}, []);
+
+	const onBackgroundClick = useCallback(() => {
+		setSelectedNode(null);
+		setSelectedEdge(null);
+	}, []);
+
+	const onNodeHover = useCallback((node: NodeObject<FGNodeData> | null) => {
+		setHoveredNodeId(node ? (node.id as string) : null);
+	}, []);
+
+	const onLinkHover = useCallback((link: LinkObject<FGNodeData, FGLinkData> | null) => {
+		setHoveredEdgeId(link ? (link.id as string) : null);
+	}, []);
+
+	const onRenderFramePre = useCallback(() => {
+		labelRectsRef.current = [];
+	}, []);
+
+	const nodeCanvasObject = useCallback(
+		(node: NodeObject<FGNodeData>, ctx: CanvasRenderingContext2D, globalScale: number) => {
+			const x = node.x ?? 0;
+			const y = node.y ?? 0;
+			const nodeId = node.id as string;
+			const isHighlighted = highlightedIds?.has(nodeId) ?? false;
+			const isSelected = selectedNode?.id === nodeId;
+			const isConnectedToSelectedEdge =
+				selectedEdge && (selectedEdge.source === nodeId || selectedEdge.target === nodeId);
+
+			ctx.beginPath();
+			ctx.arc(x, y, NODE_RADIUS, 0, 2 * Math.PI);
+			let fillColor = colors.primary;
+			if (isSelected) {
+				fillColor = "#ef4444";
+			} else if (isConnectedToSelectedEdge || isHighlighted) {
+				fillColor = colors.secondary;
+			}
+			ctx.fillStyle = fillColor;
+			ctx.fill();
+			ctx.lineWidth = 2;
+			ctx.strokeStyle = colors.backgroundBase;
+			ctx.stroke();
+
+			// Skip the label once the node itself renders too small to read next to anyway.
+			if (NODE_RADIUS * globalScale < LABEL_MIN_SCREEN_RADIUS) return;
+
+			const fontSize = LABEL_FONT_SIZE / globalScale;
+			ctx.font = `${String(fontSize)}px sans-serif`;
+			const label = node.id as string;
+			const padding = 4 / globalScale;
+			const labelX = x + NODE_RADIUS + padding;
+			const rect: Rect = {
+				x1: labelX,
+				y1: y - fontSize / 2,
+				x2: labelX + ctx.measureText(label).width,
+				y2: y + fontSize / 2,
+			};
+			// Skip the label if it would overlap one already placed this frame — first node in
+			// graphData order wins, so the same labels tend to stay visible from frame to frame.
+			if (
+				labelRectsRef.current.some((placed) => {
+					return rectsOverlap(placed, rect);
+				})
+			)
+				return;
+			labelRectsRef.current.push(rect);
+
+			ctx.fillStyle = colors.textStrong;
+			ctx.textAlign = "left";
+			ctx.textBaseline = "middle";
+			ctx.fillText(label, labelX, y);
+		},
+		[highlightedIds, colors, selectedNode, selectedEdge],
+	);
+
+	const nodePointerAreaPaint = useCallback(
+		(node: NodeObject<FGNodeData>, color: string, ctx: CanvasRenderingContext2D) => {
+			ctx.fillStyle = color;
+			ctx.beginPath();
+			ctx.arc(node.x ?? 0, node.y ?? 0, NODE_RADIUS, 0, 2 * Math.PI);
+			ctx.fill();
+		},
+		[],
+	);
+
+	const linkWidth = useCallback((link: LinkObject<FGNodeData, FGLinkData>) => {
+		return Math.max(1, Math.min(8, 1 + Math.log2(link.totalCount)));
+	}, []);
+
+	const linkColor = useCallback(
+		(link: LinkObject<FGNodeData, FGLinkData>) => {
+			const totalCount: number = link.totalCount;
+			const isSelected = selectedEdge?.data.attestations === link.attestations;
+			const isHovered = hoveredEdgeId === (link.id as string);
+
+			let baseColor = "136, 136, 136";
+			if (isSelected) {
+				baseColor = "239, 68, 68";
+			} else if (isHovered) {
+				baseColor = "100, 100, 100";
+			}
+
+			const opacity = Math.max(
+				0.25,
+				Math.min(1, 0.25 + (Math.log2(totalCount) / Math.log2(20)) * 0.75),
+			);
+			return `rgba(${baseColor}, ${String(Math.max(opacity, isSelected || isHovered ? 0.8 : opacity))})`;
+		},
+		[selectedEdge, hoveredEdgeId],
+	);
+
+	const selectedGraphNode = selectedNode ? nodeById.get(selectedNode.id) : undefined;
+
 	return (
-		<>
-			<Handle isConnectable={false} position={Position.Top} style={handleStyle} type="target" />
-			<Handle isConnectable={false} position={Position.Bottom} style={handleStyle} type="source" />
-			<NodeToolbar isVisible={hoveredId === id} position={Position.Top}>
+		<div ref={containerRef} className="relative size-full">
+			{size.width > 0 && size.height > 0 ? (
+				<ForceGraph2D
+					ref={fgRef}
+					graphData={graphData}
+					height={size.height}
+					linkColor={linkColor}
+					linkHoverPrecision={8}
+					linkWidth={linkWidth}
+					minZoom={0.02}
+					nodeCanvasObject={nodeCanvasObject}
+					nodePointerAreaPaint={nodePointerAreaPaint}
+					onBackgroundClick={onBackgroundClick}
+					onEngineTick={onEngineTick}
+					onLinkClick={onLinkClick}
+					onLinkHover={onLinkHover}
+					onNodeClick={onNodeClick}
+					onNodeHover={onNodeHover}
+					onRenderFramePre={onRenderFramePre}
+					width={size.width}
+				/>
+			) : null}
+			{selectedNode && selectedGraphNode ? (
 				<div
-					className="w-72 rounded-2 border border-stroke-weak bg-background-base text-xs shadow-md"
+					className="absolute top-4 right-4 z-50 w-72 rounded-2 border border-stroke-weak bg-background-base text-xs shadow-md"
 					onWheel={(e) => {
 						e.nativeEvent.stopPropagation();
 					}}
 				>
 					<p className="border-b border-stroke-weak px-3 py-2 font-strong text-text-strong">
-						{data.label as string}
+						{selectedGraphNode.id}
 					</p>
-					{relations.length > 0 && (
+					{selectedGraphNode.relations.length > 0 && (
 						<>
 							<p className="px-3 pt-2 pb-1 font-strong text-text-weak">{"Related persons"}</p>
 							<div className="max-h-56 overflow-y-auto px-3 pb-3">
 								<table className="w-full border-collapse">
 									<tbody>
-										{relations.map((r, i) => {
+										{selectedGraphNode.relations.map((r, i) => {
 											return (
 												<tr key={i}>
 													<td className="py-0.5 pr-3 whitespace-nowrap text-text-weak">
@@ -150,259 +410,25 @@ function PointNode({ data, id }: Readonly<NodeProps>) {
 						</>
 					)}
 				</div>
-			</NodeToolbar>
-			<div
-				className={`size-10 cursor-pointer rounded-full ring-2 ring-background-base ${isHighlighted ? "bg-secondary" : "bg-primary"}`}
-			/>
-		</>
-	);
-}
-
-const nodeTypes = { point: PointNode };
-
-// — Canvas —
-
-interface RelationshipGraphProps {
-	nodes: Array<GraphNode>;
-	edges: Array<GraphEdge>;
-}
-
-interface FlowCanvasProps {
-	graphNodes: Array<GraphNode>;
-	graphEdges: Array<GraphEdge>;
-}
-
-function FlowCanvas({ graphNodes, graphEdges }: Readonly<FlowCanvasProps>) {
-	const { setCenter } = useReactFlow();
-
-	const [hoveredEdge, setHoveredEdge] = useState<HoveredEdge | null>(null);
-	const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
-
-	// Simulation refs — mutated in place, never cause re-renders
-	const simRef = useRef<ReturnType<typeof forceSimulation<SimNode>> | null>(null);
-	const simNodeByIdRef = useRef<Map<string, SimNode>>(new Map());
-	const draggingNodeIdRef = useRef<string | null>(null);
-	// Tracks whether the mouse is inside the edge tooltip so we can keep it alive
-	const isTooltipHoveredRef = useRef(false);
-
-	const [nodes, setNodes, onNodesChange] = useNodesState<Node>(
-		graphNodes.map((n) => {
-			return {
-				id: n.id,
-				type: "point",
-				position: { x: n.x, y: n.y },
-				data: { label: n.id, relations: n.relations },
-				style: {
-					background: "transparent",
-					border: "none",
-					padding: 0,
-					width: "auto",
-					height: "auto",
-				},
-			};
-		}),
-	);
-
-	const edges = useMemo<Array<Edge>>(() => {
-		return graphEdges.map((e) => {
-			const strokeWidth = Math.max(1, Math.min(8, 1 + Math.log2(e.totalCount)));
-			const opacity = Math.max(
-				0.25,
-				Math.min(1, 0.25 + (Math.log2(e.totalCount) / Math.log2(20)) * 0.75),
-			);
-			return {
-				id: e.id,
-				source: e.source,
-				target: e.target,
-				type: "straight",
-				style: { strokeWidth, opacity, stroke: "#888" },
-				interactionWidth: 20,
-				data: { totalCount: e.totalCount, attestations: e.attestations },
-			};
-		});
-	}, [graphEdges]);
-
-	// Initialise simulation once on mount. The tick handler drives all position updates.
-	useEffect(() => {
-		const simNodes: Array<SimNode> = graphNodes.map((n) => {
-			return { id: n.id, x: n.x, y: n.y };
-		});
-		const simLinks: Array<SimLink> = graphEdges.map((e) => {
-			return { source: e.source, target: e.target };
-		});
-		simNodeByIdRef.current = new Map(
-			simNodes.map((n) => {
-				return [n.id, n];
-			}),
-		);
-
-		simRef.current = forceSimulation<SimNode>(simNodes)
-			.force(
-				"link",
-				forceLink<SimNode, SimLink>(simLinks)
-					.id((d) => {
-						return d.id;
-					})
-					.distance(120)
-					.strength(0.3),
-			)
-			.force("charge", forceManyBody<SimNode>().strength(-250))
-			.force("center", forceCenter(0, 0))
-			.force("collide", forceCollide<SimNode>(55))
-			.alpha(0.3) // start warm so the cooldown is visible on load
-			.on("tick", () => {
-				const byId = simNodeByIdRef.current;
-				const draggingId = draggingNodeIdRef.current;
-				setNodes((prev) => {
-					return prev.map((n) => {
-						if (n.id === draggingId) return n; // XYFlow owns the dragged node's position
-						const sn = byId.get(n.id);
-						if (!sn) return n;
-						const nx = sn.x ?? n.position.x;
-						const ny = sn.y ?? n.position.y;
-						if (Math.abs(nx - n.position.x) < 0.5 && Math.abs(ny - n.position.y) < 0.5) return n;
-						return { ...n, position: { x: nx, y: ny } };
-					});
-				});
-			});
-
-		return () => {
-			simRef.current?.stop();
-			simRef.current = null;
-		};
-		// graphNodes/graphEdges/setNodes are all stable for the lifetime of this component
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	// Drag: pin the node into the simulation so others react to it
-	const onNodeDragStart = useCallback((_event: MouseEvent | TouchEvent, node: Node) => {
-		draggingNodeIdRef.current = node.id;
-		const sn = simNodeByIdRef.current.get(node.id);
-		if (sn) {
-			sn.fx = node.position.x;
-			sn.fy = node.position.y;
-		}
-		simRef.current?.alphaTarget(0.3).restart();
-	}, []);
-
-	const onNodeDrag = useCallback((_event: MouseEvent | TouchEvent, node: Node) => {
-		const sn = simNodeByIdRef.current.get(node.id);
-		if (sn) {
-			sn.fx = node.position.x;
-			sn.fy = node.position.y;
-		}
-	}, []);
-
-	const onNodeDragStop = useCallback((_event: MouseEvent | TouchEvent, node: Node) => {
-		draggingNodeIdRef.current = null;
-		const sn = simNodeByIdRef.current.get(node.id);
-		if (sn) {
-			sn.fx = null;
-			sn.fy = null;
-		}
-		simRef.current?.alphaTarget(0); // let the simulation cool down
-	}, []);
-
-	// Click: pin the clicked node at the origin and reheat
-	const handleNodeClick = useCallback(
-		(_event: React.MouseEvent, clickedNode: Node) => {
-			if (!simRef.current) return;
-			for (const sn of simNodeByIdRef.current.values()) {
-				sn.fx = null;
-				sn.fy = null;
-			}
-			const clickedSn = simNodeByIdRef.current.get(clickedNode.id);
-			if (clickedSn) {
-				clickedSn.fx = 0;
-				clickedSn.fy = 0;
-			}
-			simRef.current.alpha(0.8).alphaTarget(0).restart();
-			void setCenter(0, 0, { zoom: 1, duration: 600 });
-		},
-		[setCenter],
-	);
-
-	const onEdgeMouseEnter = useCallback((event: React.MouseEvent, edge: Edge) => {
-		setHoveredEdge({ data: edge.data as EdgeData, x: event.clientX, y: event.clientY });
-	}, []);
-
-	const onEdgeMouseLeave = useCallback(() => {
-		if (!isTooltipHoveredRef.current) setHoveredEdge(null);
-	}, []);
-
-	const onNodeMouseEnter = useCallback((_event: React.MouseEvent, node: Node) => {
-		setHoveredNodeId(node.id);
-	}, []);
-
-	const onNodeMouseLeave = useCallback(() => {
-		setHoveredNodeId(null);
-	}, []);
-
-	const neighborMap = useMemo(() => {
-		const map = new Map<string, Set<string>>();
-		for (const e of graphEdges) {
-			if (!map.has(e.source)) map.set(e.source, new Set());
-			if (!map.has(e.target)) map.set(e.target, new Set());
-			map.get(e.source)!.add(e.target);
-			map.get(e.target)!.add(e.source);
-		}
-		return map;
-	}, [graphEdges]);
-
-	const hoverState = useMemo<HoverState>(() => {
-		if (!hoveredNodeId) return { hoveredId: null, highlightedIds: null };
-		const neighbors = neighborMap.get(hoveredNodeId) ?? new Set<string>();
-		return { hoveredId: hoveredNodeId, highlightedIds: new Set([hoveredNodeId, ...neighbors]) };
-	}, [hoveredNodeId, neighborMap]);
-
-	return (
-		<HoveredNodeIdContext value={hoverState}>
-			<ReactFlow
-				edges={edges}
-				fitView={true}
-				minZoom={0.02}
-				nodeTypes={nodeTypes}
-				nodes={nodes}
-				nodesConnectable={false}
-				onEdgeMouseEnter={onEdgeMouseEnter}
-				onEdgeMouseLeave={onEdgeMouseLeave}
-				onNodeClick={handleNodeClick}
-				onNodeDrag={onNodeDrag}
-				onNodeDragStart={onNodeDragStart}
-				onNodeDragStop={onNodeDragStop}
-				onNodeMouseEnter={onNodeMouseEnter}
-				onNodeMouseLeave={onNodeMouseLeave}
-				onNodesChange={onNodesChange}
-				proOptions={{ hideAttribution: false }}
-			>
-				<Background gap={24} size={1} variant={BackgroundVariant.Dots} />
-				<Controls />
-			</ReactFlow>
-			{hoveredEdge ? (
+			) : null}
+			{selectedEdge ? (
 				<div
-					className="fixed z-50 w-72 rounded-2 border border-stroke-weak bg-background-base text-xs shadow-md"
-					onMouseEnter={() => {
-						isTooltipHoveredRef.current = true;
-					}}
-					onMouseLeave={() => {
-						isTooltipHoveredRef.current = false;
-						setHoveredEdge(null);
-					}}
+					className="absolute top-4 right-4 z-50 w-72 rounded-2 border border-stroke-weak bg-background-base text-xs shadow-md"
 					onWheel={(e) => {
 						e.nativeEvent.stopPropagation();
 					}}
-					style={{
-						left: hoveredEdge.x,
-						top: hoveredEdge.y,
-						transform: "translate(-50%, calc(-100% - 8px))",
-					}}
 				>
-					{hoveredEdge.data.attestations.length > 1 && (
+					<p className="border-b border-stroke-weak px-3 py-2 font-strong text-text-strong">
+						{selectedEdge.source}
+						{" ↔ "}
+						{selectedEdge.target}
+					</p>
+					{selectedEdge.data.attestations.length > 1 && (
 						<div className="border-b border-stroke-weak px-3 py-2">
 							<p className="font-strong text-text-strong">
 								{[
 									...new Set(
-										hoveredEdge.data.attestations.map((a) => {
+										selectedEdge.data.attestations.map((a) => {
 											return a.label;
 										}),
 									),
@@ -410,15 +436,15 @@ function FlowCanvas({ graphNodes, graphEdges }: Readonly<FlowCanvasProps>) {
 							</p>
 							<p className="text-text-weak">
 								{"asserted "}
-								<span className="tabular-nums">{hoveredEdge.data.attestations.length}</span>
+								<span className="tabular-nums">{selectedEdge.data.attestations.length}</span>
 								{" times · "}
-								<span className="tabular-nums">{hoveredEdge.data.totalCount}</span>
+								<span className="tabular-nums">{selectedEdge.data.totalCount}</span>
 								{" total result count"}
 							</p>
 						</div>
 					)}
 					<div className="max-h-80 overflow-y-auto p-3">
-						{hoveredEdge.data.attestations.map((att, i) => {
+						{selectedEdge.data.attestations.map((att, i) => {
 							return (
 								<div key={i}>
 									{i > 0 && <hr className="my-2 border-stroke-weak" />}
@@ -444,14 +470,6 @@ function FlowCanvas({ graphNodes, graphEdges }: Readonly<FlowCanvasProps>) {
 					</div>
 				</div>
 			) : null}
-		</HoveredNodeIdContext>
-	);
-}
-
-export function RelationshipGraph(props: Readonly<RelationshipGraphProps>) {
-	return (
-		<ReactFlowProvider>
-			<FlowCanvas graphEdges={props.edges} graphNodes={props.nodes} />
-		</ReactFlowProvider>
+		</div>
 	);
 }
