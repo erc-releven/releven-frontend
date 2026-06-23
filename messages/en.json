@@ -102,6 +102,10 @@
 		"something-went-wrong": "Something went wrong!",
 		"try-again": "Try again"
 	},
+	"IconCard": {
+		"explore": "Explore",
+		"coming-soon": "Coming soon"
+	},
 	"ImprintPage": {
 		"meta": {
 			"title": "Imprint"

@@ -141,23 +141,41 @@ function AboutSection() {
 
 function ViewpointSection() {
 	const _t = useTranslations("IndexPage.services");
-	const cards = {
-		related: { icon: searchIcon },
-		viewpoints: { icon: compareIcon },
-		relationships: { icon: discoverIcon },
-	};
+	const cards = [
+		{
+			description: "Explore relationships between people, places, and texts on an interactive map",
+			href: "/map",
+			icon: searchIcon,
+			title: "Explore on Map",
+		},
+		{
+			description: "Discover social relationships and connections within the network",
+			href: "/relationships",
+			icon: discoverIcon,
+			title: "Discover Social Relationships",
+		},
+		{
+			description: "Learn about the Releven data model and explore our technical infrastructure",
+			href: "https://erc-releven.github.io/model-explorer/",
+			icon: compareIcon,
+			isExternal: true,
+			title: "Explore Data Model",
+		},
+	];
 	return (
 		<section className="flex flex-col items-center py-16">
 			<h2 className="text-lg font-extrabold text-primary uppercase">{_t("title")}</h2>
 			<span className="block text-center text-3xl">{_t("lead-in")}</span>
 			<div className="flex flex-col items-stretch gap-8 py-16 lg:flex-row">
-				{Object.entries(cards).map(([id, card]) => {
+				{cards.map((card) => {
 					return (
 						<IconCard
-							key={id}
-							description={_t(`${id}.description` as never)}
+							key={card.title}
+							description={card.description}
+							href={card.href}
 							icon={card.icon}
-							title={_t(`${id}.title` as never)}
+							isExternal={card.isExternal}
+							title={card.title}
 						/>
 					);
 				})}
